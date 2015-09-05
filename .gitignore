@@ -1,1 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
+*.sw*
+*.idea
+*.iml
+apidoc.html
+nb-configuration.xml
+rebel.xml
+*.class
+target/
