@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="ejb-jar" name="kanoting-ejb:ejb">
-    <output-path>$PROJECT_DIR$/ejb/target</output-path>
-    <root id="archive" name="kanoting-ejb.jar">
-      <element id="artifact" artifact-name="kanoting-ejb:ejb exploded" />
-    </root>
-  </artifact>
-</component>
