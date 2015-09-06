@@ -130,6 +130,8 @@
                     <inherited>true</inherited>
                     <configuration>
                         <skip>true</skip>
+					    <username>${wildfly-username}</username>
+					    <password>${wildfly-password}</password>
                     </configuration>
                 </plugin>
             </plugins>
