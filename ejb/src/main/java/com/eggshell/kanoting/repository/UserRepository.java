@@ -1,18 +1,24 @@
 package com.eggshell.kanoting.repository;
 
 
-import com.eggshell.kanoting.model.User;
+import com.eggshell.kanoting.model.UserEntity;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+@Stateless
 public class UserRepository {
 
     @Inject
     private EntityManager em;
 
-    public User findUser(int id) {
-        return em.find(User.class, id);
+    public UserEntity findUser(long id) {
+        return em.find(UserEntity.class, id);
+    }
+
+    public void addUser(UserEntity userEntity) {
+        em.persist(userEntity);
     }
 
 }
