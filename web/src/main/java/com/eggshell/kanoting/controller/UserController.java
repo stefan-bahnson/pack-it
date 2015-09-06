@@ -20,7 +20,7 @@ public class UserController {
     UserManager userManager;
 
     @GET
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/{userId}")
     public User getUser(@PathParam("userId") long id) {
         return userManager.getUserById(id);
