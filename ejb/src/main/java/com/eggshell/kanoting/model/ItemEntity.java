@@ -8,10 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by tailage on 9/10/15.
- */
-
 @Entity
 @Table(name = "item")
 public class ItemEntity implements Serializable {
@@ -33,4 +29,43 @@ public class ItemEntity implements Serializable {
 
     private ItemCategory itemCategory;
 
+    public List<PackListEntity> getPackLists() {
+        return packLists;
+    }
+
+    public void setPackLists(List<PackListEntity> packLists) {
+        this.packLists = packLists;
+    }
+
+    public List<WishList> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(List<WishList> wishlists) {
+        this.wishlists = wishlists;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public ItemCategory getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(ItemCategory itemCategory) {
+        this.itemCategory = itemCategory;
+    }
 }

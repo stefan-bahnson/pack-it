@@ -7,13 +7,13 @@ public class UserConverter {
 
     public User convert(UserEntity userEntity) {
         User user = new User();
-        user.setFirstName(userEntity.getFirstName());
+        user.setFirstName(userEntity.getName());
         return user;
     }
 
     public UserEntity convert(User user) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName(user.getFirstName());
+        userEntity.setName(user.getFirstName());
         return userEntity;
     }
 }

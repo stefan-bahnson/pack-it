@@ -12,7 +12,10 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String firstName;
+    private String name;
+    private String email;
+    private String password;
+
 
     @OneToMany(mappedBy = "user")
     private List<PackListEntity> packLists;
@@ -28,11 +31,43 @@ public class UserEntity implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<PackListEntity> getPackLists() {
+        return packLists;
+    }
+
+    public void setPackLists(List<PackListEntity> packLists) {
+        this.packLists = packLists;
+    }
+
+    public List<WishList> getWishLists() {
+        return wishLists;
+    }
+
+    public void setWishLists(List<WishList> wishLists) {
+        this.wishLists = wishLists;
     }
 }

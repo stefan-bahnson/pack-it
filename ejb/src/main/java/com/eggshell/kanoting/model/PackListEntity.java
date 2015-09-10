@@ -3,10 +3,6 @@ package com.eggshell.kanoting.model;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by tailage on 9/10/15.
- */
-
 @Entity
 @Table(name = "packlist")
 public class PackListEntity {
@@ -20,4 +16,20 @@ public class PackListEntity {
 
     @ManyToOne
     private UserEntity user;
+
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemEntity> items) {
+        this.items = items;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }
