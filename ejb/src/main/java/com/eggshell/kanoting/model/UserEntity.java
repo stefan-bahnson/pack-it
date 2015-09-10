@@ -1,12 +1,11 @@
 package com.eggshell.kanoting.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class UserEntity implements Serializable {
 
     @Id
@@ -14,6 +13,12 @@ public class UserEntity implements Serializable {
     private long id;
 
     private String firstName;
+
+    @OneToMany
+    private List<PackListEntity> packLists;
+
+    @OneToMany
+    private List<WishList> wishLists;
 
     public long getId() {
         return id;
