@@ -17,13 +17,10 @@ public class WishList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
-    private String name;
-
     @ManyToOne
     private UserEntity user;
 
-    @OneToMany
+    @ManyToMany(mappedBy = "wishlists")
     private List<ItemEntity> items;
 
     private Date created;

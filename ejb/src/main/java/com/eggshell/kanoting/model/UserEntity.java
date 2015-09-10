@@ -14,10 +14,10 @@ public class UserEntity implements Serializable {
 
     private String firstName;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<PackListEntity> packLists;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<WishList> wishLists;
 
     public long getId() {

@@ -112,6 +112,7 @@
             </plugin>
 
 			<!-- Generate sources from XSD -->
+            <!-- TODO: Accomplish this with only EE-dependencies if possible -->
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-xjc-plugin</artifactId>

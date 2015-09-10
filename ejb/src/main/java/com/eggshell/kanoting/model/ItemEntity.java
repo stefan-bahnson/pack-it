@@ -24,7 +24,7 @@ public class ItemEntity implements Serializable {
     private List<PackListEntity> packLists;
 
     @ManyToMany
-    private List<WishList> wishLists;
+    private List<WishList> wishlists;
 
     @NotNull
     private String name;

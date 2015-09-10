@@ -15,7 +15,7 @@ public class PackListEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "packLists")
     private List<ItemEntity> items;
 
     @ManyToOne
