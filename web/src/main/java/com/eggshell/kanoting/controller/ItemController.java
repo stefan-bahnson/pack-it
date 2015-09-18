@@ -26,7 +26,7 @@ public class ItemController {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addUser(Item item) {
+    public void addItem(Item item) {
         itemRepository.addItem(item);
     }
 }

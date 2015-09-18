@@ -17,6 +17,13 @@ public class Item implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
+    @NotNull
+    public String name;
+
+    public Date created;
+
+    public Date updated;
+
     @ManyToMany
     @XmlTransient
     public List<PackList> packLists;
@@ -25,12 +32,17 @@ public class Item implements Serializable {
     @XmlTransient
     public List<WishList> wishlists;
 
-    @NotNull
-    public String name;
-
-    public Date created;
-
     @Enumerated(EnumType.STRING)
     public ItemCategory itemCategory;
+
+    @PrePersist
+    public void onCreated() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    public void onUpdated() {
+        updated = new Date();
+    }
 
 }
