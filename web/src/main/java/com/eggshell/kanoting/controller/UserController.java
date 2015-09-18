@@ -20,10 +20,10 @@ public class UserController {
     UserRepository userRepository;
 
     @GET
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
     public User getUser(@PathParam("userId") long id) {
-        return userRepository.findUser(id);
+        return userRepository.findUserById(id);
     }
 
     @PUT

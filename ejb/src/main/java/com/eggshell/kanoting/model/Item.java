@@ -27,6 +27,7 @@ public class Item implements Serializable {
 
     private Date created;
 
+    @Enumerated(EnumType.STRING)
     private ItemCategory itemCategory;
 
     public List<PackList> getPackLists() {
