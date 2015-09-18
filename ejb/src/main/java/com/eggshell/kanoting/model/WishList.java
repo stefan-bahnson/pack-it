@@ -18,7 +18,7 @@ public class WishList implements Serializable {
     @ManyToOne
     private User user;
 
-    @ManyToMany(mappedBy = "wishlists")
+    @ManyToMany
     private List<Item> items;
 
     private Date created;

@@ -24,11 +24,11 @@ public class Item implements Serializable {
 
     public Date updated;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "items")
     @XmlTransient
     public List<PackList> packLists;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "items")
     @XmlTransient
     public List<WishList> wishlists;
 

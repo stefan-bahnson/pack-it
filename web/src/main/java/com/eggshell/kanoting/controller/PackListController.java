@@ -32,6 +32,10 @@ public class PackListController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void updatePackList(PackList packList) {
+        PackList attachedPacklist;
+
+        attachedPacklist = packListRepository.findPackListById(packList.id);
+        attachedPacklist.items = packList.items;
         packListRepository.updatePackList(packList);
     }
 }

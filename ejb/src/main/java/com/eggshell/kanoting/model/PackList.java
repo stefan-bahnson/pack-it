@@ -11,15 +11,17 @@ public class PackList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
     public String name;
 
-    @ManyToMany(mappedBy = "packLists", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Item> items;
 
     @NotNull
     @ManyToOne
     public User user;
+
+
 
 }
