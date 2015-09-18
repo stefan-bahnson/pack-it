@@ -16,10 +16,10 @@ public class WishList implements Serializable {
     private String name;
 
     @ManyToOne
-    private UserEntity user;
+    private User user;
 
     @ManyToMany(mappedBy = "wishlists")
-    private List<ItemEntity> items;
+    private List<Item> items;
 
     private Date created;
 
@@ -31,19 +31,19 @@ public class WishList implements Serializable {
         this.name = name;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public List<ItemEntity> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemEntity> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

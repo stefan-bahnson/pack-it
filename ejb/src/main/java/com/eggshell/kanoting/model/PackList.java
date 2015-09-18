@@ -5,31 +5,31 @@ import java.util.List;
 
 @Entity
 @Table(name = "packlist")
-public class PackListEntity {
+public class PackList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToMany(mappedBy = "packLists")
-    private List<ItemEntity> items;
+    private List<Item> items;
 
     @ManyToOne
-    private UserEntity user;
+    private User user;
 
-    public List<ItemEntity> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<ItemEntity> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

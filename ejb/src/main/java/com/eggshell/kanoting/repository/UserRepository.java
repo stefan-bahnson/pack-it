@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.repository;
 
 
-import com.eggshell.kanoting.model.UserEntity;
+import com.eggshell.kanoting.model.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -13,12 +13,12 @@ public class UserRepository {
     @Inject
     private EntityManager em;
 
-    public UserEntity findUser(long id) {
-        return em.find(UserEntity.class, id);
+    public User findUser(long id) {
+        return em.find(User.class, id);
     }
 
-    public void addUser(UserEntity userEntity) {
-        em.persist(userEntity);
+    public void addUser(User user) {
+        em.persist(user);
     }
 
 }

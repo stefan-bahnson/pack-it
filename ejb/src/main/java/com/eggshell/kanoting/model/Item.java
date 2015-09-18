@@ -10,14 +10,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "item")
-public class ItemEntity implements Serializable {
+public class Item implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToMany
-    private List<PackListEntity> packLists;
+    private List<PackList> packLists;
 
     @ManyToMany
     private List<WishList> wishlists;
@@ -29,11 +29,11 @@ public class ItemEntity implements Serializable {
 
     private ItemCategory itemCategory;
 
-    public List<PackListEntity> getPackLists() {
+    public List<PackList> getPackLists() {
         return packLists;
     }
 
-    public void setPackLists(List<PackListEntity> packLists) {
+    public void setPackLists(List<PackList> packLists) {
         this.packLists = packLists;
     }
 

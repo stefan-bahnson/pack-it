@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class UserEntity implements Serializable {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class UserEntity implements Serializable {
 
 
     @OneToMany(mappedBy = "user")
-    private List<PackListEntity> packLists;
+    private List<PackList> packLists;
 
     @OneToMany(mappedBy = "user")
     private List<WishList> wishLists;
@@ -55,11 +55,11 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
-    public List<PackListEntity> getPackLists() {
+    public List<PackList> getPackLists() {
         return packLists;
     }
 
-    public void setPackLists(List<PackListEntity> packLists) {
+    public void setPackLists(List<PackList> packLists) {
         this.packLists = packLists;
     }
 

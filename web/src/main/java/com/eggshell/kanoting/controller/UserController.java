@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.controller;
 
-import com.eggshell.kanoting.data.User;
-import com.eggshell.kanoting.manager.UserManager;
+import com.eggshell.kanoting.model.User;
+import com.eggshell.kanoting.repository.UserRepository;
 
 import javax.inject.Inject;
 
@@ -12,24 +12,23 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.PathParam;
 
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/users")
 public class UserController {
 
     @Inject
-    UserManager userManager;
+    UserRepository userRepository;
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("/{userId}")
     public User getUser(@PathParam("userId") long id) {
-        return userManager.getUserById(id);
+        return userRepository.findUser(id);
     }
 
     @PUT
     public void addUser(User user) {
-        userManager.addUser(user);
+        userRepository.addUser(user);
     }
 
 
