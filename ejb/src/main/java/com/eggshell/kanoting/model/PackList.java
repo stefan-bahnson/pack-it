@@ -1,6 +1,8 @@
 package com.eggshell.kanoting.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -11,25 +13,13 @@ public class PackList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(mappedBy = "packLists")
-    private List<Item> items;
+    public String name;
 
+    @ManyToMany(mappedBy = "packLists", fetch = FetchType.EAGER)
+    public List<Item> items;
+
+    @NotNull
     @ManyToOne
-    private User user;
+    public User user;
 
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
