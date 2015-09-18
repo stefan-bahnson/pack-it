@@ -19,7 +19,6 @@ public abstract class Repository {
     EntityManager em;
 
     private Logger logger;
-    protected Class t;
 
     protected <T> T add(T t) {
         this.em.persist(t);

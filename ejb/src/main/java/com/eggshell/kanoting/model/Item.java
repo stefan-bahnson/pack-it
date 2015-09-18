@@ -4,6 +4,7 @@ import com.eggshell.kanoting.model.enums.ItemCategory;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,59 +15,22 @@ public class Item implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
     @ManyToMany
-    private List<PackList> packLists;
+    @XmlTransient
+    public List<PackList> packLists;
 
     @ManyToMany
-    private List<WishList> wishlists;
+    @XmlTransient
+    public List<WishList> wishlists;
 
     @NotNull
-    private String name;
+    public String name;
 
-    private Date created;
+    public Date created;
 
     @Enumerated(EnumType.STRING)
-    private ItemCategory itemCategory;
+    public ItemCategory itemCategory;
 
-    public List<PackList> getPackLists() {
-        return packLists;
-    }
-
-    public void setPackLists(List<PackList> packLists) {
-        this.packLists = packLists;
-    }
-
-    public List<WishList> getWishlists() {
-        return wishlists;
-    }
-
-    public void setWishlists(List<WishList> wishlists) {
-        this.wishlists = wishlists;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public ItemCategory getItemCategory() {
-        return itemCategory;
-    }
-
-    public void setItemCategory(ItemCategory itemCategory) {
-        this.itemCategory = itemCategory;
-    }
 }
