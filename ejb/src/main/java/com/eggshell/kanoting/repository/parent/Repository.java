@@ -1,7 +1,5 @@
 package com.eggshell.kanoting.repository.parent;
 
-import javax.inject.Inject;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;

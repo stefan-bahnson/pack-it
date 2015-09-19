@@ -3,6 +3,7 @@ package com.eggshell.kanoting.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,8 @@ public class PackList {
     @ManyToOne
     public User user;
 
+    public Date created;
 
+    public Date updated;
 
 }
