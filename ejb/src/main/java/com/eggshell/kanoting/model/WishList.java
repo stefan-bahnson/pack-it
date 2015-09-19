@@ -28,4 +28,14 @@ public class WishList implements Serializable {
     public Date updated;
 
 
+    @PrePersist
+    public void onCreated() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    public void onUpdated() {
+        updated = new Date();
+    }
+
 }
