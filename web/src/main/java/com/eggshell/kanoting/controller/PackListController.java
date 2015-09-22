@@ -34,8 +34,8 @@ public class PackListController {
     public void updatePackList(PackList packList) {
         PackList attachedPacklist;
 
-        attachedPacklist = packListRepository.findPackListById(packList.id);
-        attachedPacklist.items = packList.items;
+        attachedPacklist = packListRepository.findPackListById(packList.getId());
+        attachedPacklist.setItems(packList.getItems());
         packListRepository.updatePackList(packList);
     }
 }

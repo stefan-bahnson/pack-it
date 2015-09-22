@@ -12,30 +12,77 @@ public class WishList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
-    public String name;
+    private String name;
 
     @NotNull
     @ManyToOne
-    public User user;
+    private User user;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    public List<Item> items;
+    private List<Item> items;
 
-    public Date created;
+    private Date created;
 
-    public Date updated;
+    private Date updated;
 
 
     @PrePersist
-    public void onCreated() {
+    private void onCreated() {
         created = new Date();
     }
 
     @PreUpdate
-    public void onUpdated() {
+    private void onUpdated() {
         updated = new Date();
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 }

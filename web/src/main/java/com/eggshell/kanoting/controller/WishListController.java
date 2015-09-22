@@ -37,8 +37,8 @@ public class WishListController {
     public void updatePackList(WishList wishList) {
         WishList attachedWishlist;
 
-        attachedWishlist = wishListRepository.findWishListById(wishList.id);
-        attachedWishlist.items = wishList.items;
+        attachedWishlist = wishListRepository.findWishListById(wishList.getId());
+        attachedWishlist.setItems(wishList.getItems());
         wishListRepository.updateWishList(wishList);
     }
 }

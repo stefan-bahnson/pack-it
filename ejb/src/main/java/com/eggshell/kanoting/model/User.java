@@ -13,18 +13,65 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
 
-    public String name;
-    public String email;
-    public String password;
-
-    @XmlTransient
-    @OneToMany(mappedBy = "user")
-    public List<PackList> packLists;
+    private String name;
+    private String email;
+    private String password;
 
     @XmlTransient
     @OneToMany(mappedBy = "user")
-    public List<WishList> wishLists;
+    private List<PackList> packLists;
 
+    @XmlTransient
+    @OneToMany(mappedBy = "user")
+    private List<WishList> wishLists;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<PackList> getPackLists() {
+        return packLists;
+    }
+
+    public void setPackLists(List<PackList> packLists) {
+        this.packLists = packLists;
+    }
+
+    public List<WishList> getWishLists() {
+        return wishLists;
+    }
+
+    public void setWishLists(List<WishList> wishLists) {
+        this.wishLists = wishLists;
+    }
 }
