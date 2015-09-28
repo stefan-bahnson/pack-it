@@ -29,4 +29,10 @@ public class ItemController {
     public void addItem(Item item) {
         itemRepository.addItem(item);
     }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteItem(Item item) {
+        itemRepository.deleteItem(item);
+    }
 }

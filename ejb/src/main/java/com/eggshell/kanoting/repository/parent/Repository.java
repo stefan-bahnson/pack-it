@@ -1,5 +1,8 @@
 package com.eggshell.kanoting.repository.parent;
 
+import com.eggshell.kanoting.model.Item;
+import com.eggshell.kanoting.model.User;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -36,9 +39,10 @@ public abstract class Repository {
     }
 
 
-    protected void delete(Object t) {
-        Object ref = this.em.getReference(t.getClass(), t);
-        this.em.remove(t);
+    protected void delete(Class t, long id) {
+        Object ref = this.em.getReference(t, id);
+        this.em.remove(ref);
+
     }
 
 

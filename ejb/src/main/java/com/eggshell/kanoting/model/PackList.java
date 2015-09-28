@@ -2,30 +2,32 @@ package com.eggshell.kanoting.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "packlist")
-public class PackList {
+public class PackList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
-    private String name;
+    public String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Item> items;
+    public Set<Item> items;
 
     @NotNull
-    @ManyToOne
-    private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    public User user;
 
-    private Date created;
+    public Date created;
 
-    private Date updated;
+    public Date updated;
 
     @PrePersist
     private void onCreated() {
@@ -37,51 +39,4 @@ public class PackList {
         updated = new Date();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

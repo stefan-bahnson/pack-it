@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "wishlist")
@@ -12,21 +13,20 @@ public class WishList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
-    private String name;
-
-    @NotNull
-    @ManyToOne
-    private User user;
+    public String name;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Item> items;
+    public Set<Item> items;
 
-    private Date created;
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    public User user;
 
-    private Date updated;
+    public Date created;
 
+    public Date updated;
 
     @PrePersist
     private void onCreated() {
@@ -38,51 +38,4 @@ public class WishList implements Serializable {
         updated = new Date();
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }

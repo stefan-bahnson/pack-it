@@ -1,77 +1,43 @@
 package com.eggshell.kanoting.model;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+
+@NamedQueries({
+        @NamedQuery(name = User.FIND_BY_EMAIL, query = User.SELECT_FROM_WHERE + "email = :email")
+})
 
 @XmlRootElement
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
 
+    public static final String FIND_BY_EMAIL = "User.findByEmail";
+    public static final String FIND_BY_ID = "User.findById";
+    public static final String SELECT_FROM_WHERE = "SELECT u FROM User u WHERE u.";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
 
-    private String name;
-    private String email;
-    private String password;
+    public String name;
 
-    @XmlTransient
-    @OneToMany(mappedBy = "user")
-    private List<PackList> packLists;
+    @Email
+    public String email;
+    public String password;
 
     @XmlTransient
-    @OneToMany(mappedBy = "user")
-    private List<WishList> wishLists;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    public Set<PackList> packLists;
 
-    public long getId() {
-        return id;
-    }
+    @XmlTransient
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    public Set<WishList> wishLists;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<PackList> getPackLists() {
-        return packLists;
-    }
-
-    public void setPackLists(List<PackList> packLists) {
-        this.packLists = packLists;
-    }
-
-    public List<WishList> getWishLists() {
-        return wishLists;
-    }
-
-    public void setWishLists(List<WishList> wishLists) {
-        this.wishLists = wishLists;
-    }
 }

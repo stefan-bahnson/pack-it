@@ -22,7 +22,7 @@ public class WishListController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{wishListId}")
-    public WishList getUser(@PathParam("wishListId") long id) {
+    public WishList getWishList(@PathParam("wishListId") long id) {
         return wishListRepository.findWishListById(id);
     }
 
@@ -34,11 +34,13 @@ public class WishListController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updatePackList(WishList wishList) {
-        WishList attachedWishlist;
-
-        attachedWishlist = wishListRepository.findWishListById(wishList.getId());
-        attachedWishlist.setItems(wishList.getItems());
+    public void updateWishList(WishList wishList) {
         wishListRepository.updateWishList(wishList);
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteWishList(WishList wishList) {
+        wishListRepository.deleteWishList(wishList);
     }
 }

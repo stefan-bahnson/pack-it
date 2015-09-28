@@ -6,6 +6,7 @@ import com.eggshell.kanoting.repository.ItemRepository;
 import com.eggshell.kanoting.repository.PackListRepository;
 
 import javax.inject.Inject;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -32,10 +33,12 @@ public class PackListController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void updatePackList(PackList packList) {
-        PackList attachedPacklist;
-
-        attachedPacklist = packListRepository.findPackListById(packList.getId());
-        attachedPacklist.setItems(packList.getItems());
         packListRepository.updatePackList(packList);
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deletePackList(PackList packList){
+        packListRepository.deletePacklist(packList);
     }
 }
