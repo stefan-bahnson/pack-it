@@ -25,7 +25,7 @@ public class LoginController {
         String password = user.password;
         user = userRepository.findUserByEmail(user.email);
         Map<String, Object> result = new HashMap<>();
-        if(userRepository.login(user, password)) {
+        if(userRepository.authenticate(user, password)) {
             result.put("success", true);
             result.put("object", user );
         } else {

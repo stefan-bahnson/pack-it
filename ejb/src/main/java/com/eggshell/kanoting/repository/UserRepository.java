@@ -28,18 +28,11 @@ public class UserRepository extends Repository {
         delete(User.class, user.id);
     }
 
-    public boolean login(User user, String password) {
-
-        boolean succcess = false;
-
+    public boolean authenticate(User user, String password) {
         try {
-            if(PasswordHashes.validatePassword(password, user.password)) {
-                succcess = true;
-            }
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException  e) {
-            e.printStackTrace();
+            return PasswordHashes.validatePassword(password, user.password);
+        } catch(NoSuchAlgorithmException | InvalidKeySpecException  e) {
+            throw new RuntimeException(e);
         }
-
-        return succcess;
     }
 }
