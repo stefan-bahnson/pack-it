@@ -2,8 +2,6 @@ package com.eggshell.kanoting.repository;
 
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.repository.parent.Repository;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
-
 import javax.ejb.Stateless;
 
 @Stateless
