@@ -28,7 +28,7 @@ public class UserController {
         return userRepository.findUserById(id);
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addUser(User user) {
         try {

@@ -24,13 +24,13 @@ public class WishListController {
         return wishListRepository.findWishListById(id);
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addWishList(WishList wishList) {
         wishListRepository.addWishList(wishList);
     }
 
-    @POST
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateWishList(WishList wishList) {
         wishListRepository.updateWishList(wishList);

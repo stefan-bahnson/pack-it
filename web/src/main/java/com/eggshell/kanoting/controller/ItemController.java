@@ -23,7 +23,7 @@ public class ItemController {
         return itemRepository.findItemById(id);
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addItem(Item item) {
         itemRepository.addItem(item);

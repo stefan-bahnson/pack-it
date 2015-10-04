@@ -23,13 +23,13 @@ public class PackListController {
         return packListRepository.findPackListById(id);
     }
 
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addPackList(PackList packList) {
         packListRepository.addPackList(packList);
     }
 
-    @POST
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void updatePackList(PackList packList) {
         packListRepository.updatePackList(packList);
