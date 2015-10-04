@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller;
+package com.eggshell.kanoting.controller.activator;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
