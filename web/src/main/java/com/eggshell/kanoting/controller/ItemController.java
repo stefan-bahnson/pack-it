@@ -1,5 +1,7 @@
 package com.eggshell.kanoting.controller;
 
+import com.eggshell.kanoting.filter.helper.annotation.Role;
+import com.eggshell.kanoting.filter.helper.annotation.Secured;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.repository.ItemRepository;
 
@@ -7,10 +9,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-/**
- * Created by tailage on 9/18/15.
- */
-
+@Secured(Role.LOGGED_IN)
 @Path("/items")
 public class ItemController {
 
@@ -20,7 +19,7 @@ public class ItemController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{itemId}")
-    public Item getUser(@PathParam("itemId") long id) {
+    public Item getItem(@PathParam("itemId") long id) {
         return itemRepository.findItemById(id);
     }
 

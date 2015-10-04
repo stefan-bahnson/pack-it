@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.controller;
 
-import com.eggshell.kanoting.model.PackList;
-import com.eggshell.kanoting.model.User;
+import com.eggshell.kanoting.filter.helper.annotation.Role;
+import com.eggshell.kanoting.filter.helper.annotation.Secured;
 import com.eggshell.kanoting.model.WishList;
 import com.eggshell.kanoting.repository.WishListRepository;
 
@@ -9,10 +9,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-/**
- * Created by tailage on 9/19/15.
- */
 
+@Secured(Role.LOGGED_IN)
 @Path("/wishlists")
 public class WishListController {
 

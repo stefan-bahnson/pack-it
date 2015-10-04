@@ -40,6 +40,7 @@ public class UserController {
         userRepository.addUser(user);
     }
 
+    @Secured(Role.LOGGED_IN)
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteUser(User user) {
