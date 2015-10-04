@@ -27,14 +27,14 @@ public class Authenticate implements ContainerRequestFilter {
     public void filter(ContainerRequestContext crc) throws IOException {
         String authorizationHeader = crc.getHeaderString(HttpHeaders.AUTHORIZATION);
         if(authorizationHeader == null) {
-            crc.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+            crc.abortWith(Response.status(Response.Status.FORBIDDEN).build());
             return;
         }
         BasicAuthorization basicAuth = new BasicAuthorization(authorizationHeader);
-        User user = userRepository.findUserByEmail(basicAuth.getUsername());
-        boolean authenticated = userRepository.authenticate(user, basicAuth.getHashedPassword());
+        User user = userRepository.findUserByEmail(basicAuth.username());
+        boolean authenticated = userRepository.authenticate(user, basicAuth.password());
         if(!authenticated) {
-            crc.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+            crc.abortWith(Response.status(Response.Status.FORBIDDEN).build());
         } else {
             crc.setProperty(User.class.getName(), user);
         }
