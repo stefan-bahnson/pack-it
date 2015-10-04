@@ -35,6 +35,8 @@ public class Authenticate implements ContainerRequestFilter {
         boolean authenticated = userRepository.authenticate(user, basicAuth.getHashedPassword());
         if(!authenticated) {
             crc.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+        } else {
+            crc.setProperty(User.class.getName(), user);
         }
     }
 }
