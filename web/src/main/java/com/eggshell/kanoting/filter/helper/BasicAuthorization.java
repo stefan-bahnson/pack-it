@@ -5,18 +5,18 @@ import javax.xml.bind.DatatypeConverter;
 public class BasicAuthorization {
 
     private String username;
-    private String hashedPassword;
+    private String password;
 
     public BasicAuthorization(String authorizationHeader) {
         String decoded = decode(authorizationHeader);
         String[] splitted = decoded.split(":");
         this.username = splitted[0];
         // Since the hashed password might contain char ':' we must concatenate the rest of the array
-        hashedPassword = "";
+        password = "";
         for(int i = 1; i < splitted.length; i++) {
-            hashedPassword += splitted[i];
+            password += splitted[i];
         }
-        if(!isSet(username) || !isSet(hashedPassword)) {
+        if(!isSet(username) || !isSet(password)) {
             throw new IllegalArgumentException("Username or password cannot be empty");
         }
     }
@@ -36,11 +36,11 @@ public class BasicAuthorization {
         return str != null && !str.isEmpty();
     }
 
-    public String getUsername() {
+    public String username() {
         return username;
     }
 
-    public String getHashedPassword() {
-        return hashedPassword;
+    public String password() {
+        return password;
     }
 }
