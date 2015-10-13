@@ -20,8 +20,7 @@ public class WishList implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     public Set<Item> items;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     public User user;
 
     public Date created;

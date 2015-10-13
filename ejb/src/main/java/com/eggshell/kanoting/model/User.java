@@ -36,9 +36,4 @@ public class User implements Serializable {
     @XmlTransient
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     public Set<PackList> packLists;
-
-    @XmlTransient
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    public Set<WishList> wishLists;
-
 }
