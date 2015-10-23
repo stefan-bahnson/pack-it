@@ -25,14 +25,6 @@ public class Item implements Serializable {
 
     public Date updated;
 
-    @XmlTransient
-    @ManyToMany(mappedBy = "items")
-    public Set<PackList> packLists;
-
-    @XmlTransient
-    @ManyToMany(mappedBy = "items")
-    public Set<WishList> wishlists;
-
     @Enumerated(EnumType.STRING)
     public ItemCategory itemCategory;
 
