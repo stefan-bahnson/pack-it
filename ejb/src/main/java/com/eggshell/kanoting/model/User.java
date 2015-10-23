@@ -31,9 +31,6 @@ public class User implements Serializable {
     @Email
     public String email;
     public String password;
-    public boolean admin;
 
-    @XmlTransient
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    public Set<PackList> packLists;
+
 }

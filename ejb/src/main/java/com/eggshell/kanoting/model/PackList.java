@@ -22,7 +22,7 @@ public class PackList implements Serializable {
     public Set<Item> items;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     public User user;
 
     public Date created;
