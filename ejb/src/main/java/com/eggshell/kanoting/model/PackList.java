@@ -3,9 +3,7 @@ package com.eggshell.kanoting.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity

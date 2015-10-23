@@ -20,6 +20,10 @@ public class UserRepository extends Repository {
         return getEm().createNamedQuery(User.FIND_BY_EMAIL, User.class).setParameter("email", email).getSingleResult();
     }
 
+    public void updateUser(User user) {
+        update(user);
+    }
+
     public void addUser(User user) {
         add(user);
     }
