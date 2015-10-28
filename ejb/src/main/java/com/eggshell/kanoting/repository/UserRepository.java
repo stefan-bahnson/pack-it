@@ -5,6 +5,7 @@ import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
+import javax.persistence.EntityNotFoundException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -21,7 +22,11 @@ public class UserRepository extends Repository {
     }
 
     public void updateUser(User user) {
-        update(user);
+        if(getEm().getReference(User.class, user.id) != null) {
+            update(user);
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 
     public void addUser(User user) {

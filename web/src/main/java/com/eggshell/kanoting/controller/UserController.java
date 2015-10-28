@@ -51,18 +51,10 @@ public class UserController {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateUser(User user) {
-
-        User userToMerge;
-
-        userToMerge = userRepository.findUserById(user.id);
-        userToMerge.roles = user.roles;
-
-        userRepository.updateUser(userToMerge);
+        userRepository.updateUser(user);
     }
 
-    private merge(User newUser, User existingUser) {
-        
-    }
+
 
 
     @Secured(Role.LOGGED_IN)
