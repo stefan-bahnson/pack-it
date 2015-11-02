@@ -14,6 +14,8 @@ public class EJBExceptionMapper implements ExceptionMapper<EJBException> {
     public Response toResponse(EJBException ex) {
         Throwable cause = ex.getCause();
         Response unkownError = Response.serverError().header("cause", ex).build();
+
+
         if(cause == null) {
             return unkownError;
         }

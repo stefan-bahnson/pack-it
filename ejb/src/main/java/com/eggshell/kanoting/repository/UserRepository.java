@@ -24,8 +24,6 @@ public class UserRepository extends Repository {
     public void updateUser(User user) {
         if(getEm().getReference(User.class, user.id) != null) {
             update(user);
-        } else {
-            throw new EntityNotFoundException();
         }
     }
 
