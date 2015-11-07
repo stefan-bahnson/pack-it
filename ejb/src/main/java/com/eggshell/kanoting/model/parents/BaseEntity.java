@@ -1,6 +1,9 @@
-package com.eggshell.kanoting.model;
+package com.eggshell.kanoting.model.parents;
+
+import com.eggshell.kanoting.model.User;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +13,7 @@ public abstract class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @XmlTransient
+    @ManyToMany
     public List<User> authorizedUsers;
 }

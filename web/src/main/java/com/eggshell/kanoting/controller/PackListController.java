@@ -1,19 +1,22 @@
 package com.eggshell.kanoting.controller;
 
+import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.filter.helper.annotation.Role;
 import com.eggshell.kanoting.filter.helper.annotation.Secured;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.repository.PackListRepository;
+import com.eggshell.kanoting.security.Roles;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Secured(Role.LOGGED_IN)
+@RolesAllowed(Roles.LOGGED_IN)
 @Path("/packlists")
-public class PackListController {
+public class PackListController extends BaseController {
 
     @Inject
     PackListRepository packListRepository;
@@ -22,7 +25,7 @@ public class PackListController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{packListId}")
     public PackList getPackList(@PathParam("packListId") long id) {
-        return packListRepository.findPackListById(id);
+        return packListRepository.findPackListById(id, loggedInUserId());
     }
 
     @POST
@@ -34,13 +37,13 @@ public class PackListController {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void updatePackList(PackList packList) {
-        packListRepository.updatePackList(packList);
+        packListRepository.updatePackList(loggedInUserId(), packList);
     }
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public void deletePackList(PackList packList) {
-        packListRepository.deletePacklist(packList);
+        packListRepository.deletePacklist(loggedInUserId(), packList);
     }
 
     /**
@@ -50,6 +53,6 @@ public class PackListController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/items")
     public void deleteItemFromPackList(@PathParam("id") long id, List<Item> items) {
-        packListRepository.deleteItemsFromPackList(id, items);
+        packListRepository.deleteItemsFromPackList(id, loggedInUserId(), items);
     }
 }

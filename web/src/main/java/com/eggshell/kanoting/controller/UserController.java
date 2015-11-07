@@ -1,11 +1,11 @@
 package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.authentication.PasswordHashes;
+import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.User;
-import com.eggshell.kanoting.repository.GroupRepository;
 import com.eggshell.kanoting.repository.UserRepository;
+import com.eggshell.kanoting.security.Roles;
 
-import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 
@@ -19,25 +19,21 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.HashSet;
 
 @Path("/users")
-public class UserController {
+public class UserController extends BaseController {
 
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/users");
 
     @Inject
     UserRepository userRepository;
 
-    @Inject
-    GroupRepository groupRepository;
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
-    @RolesAllowed({"user", "admin"})
+    @RolesAllowed({Roles.LOGGED_IN})
     public Response getUser(@PathParam("userId") long id) {
-        User user = userRepository.findUserById(id);
+        User user = userRepository.findUserById(id, loggedInUserId());
         Response response;
         if(user == null) {
            response = Response.noContent().header("cause: ", "No entity found for: " + id).build();
@@ -52,9 +48,6 @@ public class UserController {
     public Response addUser(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         user.password = PasswordHashes.createHash(user.password);
-        user.roles = new HashSet<>();
-        user.roles.add(groupRepository.findByName("user"));
-
 
         User persistedUser = userRepository.addUser(user);
         long id = persistedUser.id;
@@ -69,8 +62,9 @@ public class UserController {
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"logged_in"})
     public Response deleteUser(User user) {
-        userRepository.deleteUser(user);
+        userRepository.deleteUser(loggedInUserId(), user);
         return Response.ok().build();
     }
 

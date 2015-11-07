@@ -1,12 +1,16 @@
-package com.eggshell.kanoting.model;
+package com.eggshell.kanoting.model.parents;
+
+import com.eggshell.kanoting.model.Item;
+import com.eggshell.kanoting.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
 @MappedSuperclass
-public abstract class List extends BaseEntity {
+public abstract class ListEntity extends BaseEntity {
 
     public String name;
 
@@ -24,6 +28,8 @@ public abstract class List extends BaseEntity {
     @PrePersist
     protected void onCreated() {
         created = new Date();
+        authorizedUsers = new ArrayList<>();
+        authorizedUsers.add(user);
     }
 
     @PreUpdate

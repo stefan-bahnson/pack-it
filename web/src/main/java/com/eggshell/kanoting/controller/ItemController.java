@@ -1,13 +1,12 @@
 package com.eggshell.kanoting.controller;
 
-import com.eggshell.kanoting.filter.helper.annotation.Role;
-import com.eggshell.kanoting.filter.helper.annotation.Secured;
+import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.Item;
-import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.ItemRepository;
+import com.eggshell.kanoting.security.Roles;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -16,9 +15,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
-@Secured(Role.LOGGED_IN)
+@RolesAllowed(Roles.LOGGED_IN)
 @Path("/items")
-public class ItemController {
+public class ItemController extends BaseController{
 
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/items");
 
@@ -29,7 +28,7 @@ public class ItemController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{itemId}")
     public Response getItem(@PathParam("itemId") long id) {
-        Item item = itemRepository.findItemById(id);
+        Item item = itemRepository.findItemById(id, loggedInUserId());
 
         Response response;
 
@@ -63,7 +62,7 @@ public class ItemController {
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteItem(Item item) {
-        itemRepository.deleteItem(item);
+        itemRepository.deleteItem(loggedInUserId(), item);
         return Response.ok().build();
     }
 }

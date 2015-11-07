@@ -1,5 +1,6 @@
 package com.eggshell.kanoting.controller.activator;
 
+import com.eggshell.kanoting.EJBExceptionMapper;
 import com.eggshell.kanoting.controller.*;
 import com.eggshell.kanoting.filter.Authenticate;
 import com.eggshell.kanoting.filter.MySecurityContext;
@@ -24,9 +25,10 @@ public class JaxRsActivator extends Application {
         resources.add(WishListController.class);
         resources.add(LoginController.class);
 
-        // Filters (Auth)
+        // For activation of javax.security.annotations
         resources.add(RolesAllowedDynamicFeature.class);
         resources.add(Authenticate.class);
+        resources.add(EJBExceptionMapper.class);
 
         return resources;
     }

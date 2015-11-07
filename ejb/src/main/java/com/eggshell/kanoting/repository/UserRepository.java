@@ -19,20 +19,17 @@ public class UserRepository extends Repository {
     @Resource
     SessionContext ctx;
 
-    public User findUserById(long id) {
-        if(ctx.isCallerInRole("admin")) {
-            System.out.println("hej");
-        }
-        return find(User.class, id);
+    public User findUserById(long id, long userId) {
+        return find(id, userId, User.class);
     }
 
     public User findUserByEmail(String email) {
         return getEm().createNamedQuery(User.FIND_BY_EMAIL, User.class).setParameter("email", email).getSingleResult();
     }
 
-    public void updateUser(User user) {
+    public void updateUser(long userId, User user) {
         if(getEm().getReference(User.class, user.id) != null) {
-            update(user);
+            update(userId, user);
         }
     }
 
@@ -40,8 +37,8 @@ public class UserRepository extends Repository {
         return add(user);
     }
 
-    public void deleteUser(User user) {
-        delete(User.class, user.id);
+    public void deleteUser(long userId, User user) {
+        delete(user.id, userId, User.class);
     }
 
     public boolean authenticate(User user, String password) {

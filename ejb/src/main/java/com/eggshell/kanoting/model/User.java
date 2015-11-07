@@ -1,12 +1,13 @@
 package com.eggshell.kanoting.model;
 
+import com.eggshell.kanoting.model.parents.BaseEntity;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Set;
 
 @NamedQueries({
@@ -25,7 +26,6 @@ public class User extends BaseEntity implements Principal {
     @NotNull
     public String name;
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     public Set<Role> roles;
 
@@ -35,6 +35,11 @@ public class User extends BaseEntity implements Principal {
     @NotNull
     public String password;
 
+    @PrePersist
+    public void onCreated() {
+        authorizedUsers = new ArrayList<>();
+        authorizedUsers.add(this);
+    }
 
     @Override
     public String getName() {

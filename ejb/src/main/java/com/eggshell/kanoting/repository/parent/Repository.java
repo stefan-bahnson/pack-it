@@ -1,10 +1,13 @@
 package com.eggshell.kanoting.repository.parent;
 
-import com.eggshell.kanoting.model.Item;
+import com.eggshell.kanoting.exceptions.UnauthorizedException;
 import com.eggshell.kanoting.model.User;
+import com.eggshell.kanoting.model.parents.BaseEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -17,31 +20,51 @@ import java.util.logging.Logger;
 public abstract class Repository {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     private Logger logger;
 
-    protected <T> T add(T t) {
-        this.em.persist(t);
-        this.em.flush();
-        this.em.refresh(t);
-        return t;
+    protected <T extends BaseEntity> T add(T entity) {
+        em.persist(entity);
+        em.flush();
+        em.refresh(entity);
+        return entity;
     }
 
-    @SuppressWarnings("unchecked")
-    protected <T> T find(Class type, Object id) {
-        return (T) this.em.find(type, id);
+    private <T extends BaseEntity> boolean isAuthorized(long id, long userId, Class<T> type) {
+        String className = type.getSimpleName();
+        String basePart = String.format("SELECT e FROM %s e WHERE e.id = :id", className);
+        String authPart = "exists(SELECT user FROM e.authorizedUsers user WHERE user.id = :userId)";
+        TypedQuery<BaseEntity> query = em.createQuery(basePart + " AND " + authPart, BaseEntity.class);
+        query = query.setParameter("id", id).setParameter("userId", userId);
+        return !query.getResultList().isEmpty();
+
     }
 
 
-    protected <T> T update(T t) {
-        return this.em.merge(t);
+    public <T extends BaseEntity> T find(long id, long userId, Class<T> type) {
+        if(!isAuthorized(id, userId, type)) {
+            throw new UnauthorizedException();
+        }
+        return em.find(type, id);
     }
 
 
-    protected void delete(Class t, long id) {
-        Object ref = this.em.getReference(t, id);
-        this.em.remove(ref);
+
+    protected <T extends BaseEntity> T update(long userId, T entity) {
+        if(!isAuthorized(entity.id, userId, entity.getClass())) {
+            throw new UnauthorizedException();
+        }
+        return em.merge(entity);
+    }
+
+
+    protected <T extends BaseEntity> void delete(long id, long userId, Class<T> type) {
+        if(!isAuthorized(id, userId, type)) {
+            throw new UnauthorizedException();
+        }
+        Object ref = em.getReference(type, id);
+        em.remove(ref);
 
     }
 
