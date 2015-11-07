@@ -3,6 +3,7 @@ package com.eggshell.kanoting.repository;
 import com.eggshell.kanoting.data.User;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
+import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
 import java.util.stream.Collectors;
