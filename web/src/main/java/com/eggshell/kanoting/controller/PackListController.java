@@ -37,7 +37,16 @@ public class PackListController {
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deletePackList(PackList packList){
+    public void deletePackList(PackList packList) {
         packListRepository.deletePacklist(packList);
+    }
+
+    /**
+     * Removes an item from a packlist, if there is no relations to the item it also removes the item entity
+     */
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteItemFromPackList(PackList packList) {
+        packListRepository.deleteItemsFromPackList(packList);
     }
 }

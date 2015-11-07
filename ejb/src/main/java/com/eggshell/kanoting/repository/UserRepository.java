@@ -6,6 +6,7 @@ import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.ConstraintViolationException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -27,8 +28,8 @@ public class UserRepository extends Repository {
         }
     }
 
-    public void addUser(User user) {
-        add(user);
+    public User addUser(User user) {
+        return add(user);
     }
 
     public void deleteUser(User user) {

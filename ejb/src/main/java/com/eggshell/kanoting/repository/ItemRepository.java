@@ -16,8 +16,8 @@ public class ItemRepository extends Repository {
         return find(Item.class, id);
     }
 
-    public void addItem(Item item) {
-        add(item);
+    public Item addItem(Item item) {
+        return add(item);
     }
 
     public void deleteItem(Item item) {
