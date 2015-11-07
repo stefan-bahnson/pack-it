@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.Set;
 
 @NamedQueries({
@@ -15,7 +16,7 @@ import java.util.Set;
 @XmlRootElement
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class User implements Serializable, Principal {
 
     public static final String FIND_BY_EMAIL = "User.findByEmail";
     public static final String FIND_BY_ID = "User.findById";
@@ -31,7 +32,7 @@ public class User implements Serializable {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    public Set<Group> roles;
+    public Set<Role> roles;
 
     @Email
     public String email;
@@ -39,5 +40,10 @@ public class User implements Serializable {
     @NotNull
     public String password;
 
+
+    @Override
+    public String getName() {
+        return null;
+    }
 
 }

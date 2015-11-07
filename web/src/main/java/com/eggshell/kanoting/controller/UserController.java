@@ -5,6 +5,8 @@ import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.GroupRepository;
 import com.eggshell.kanoting.repository.UserRepository;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 
 import javax.validation.Valid;
@@ -17,7 +19,6 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 @Path("/users")
@@ -31,10 +32,10 @@ public class UserController {
     @Inject
     GroupRepository groupRepository;
 
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
+    @RolesAllowed({"user", "admin"})
     public Response getUser(@PathParam("userId") long id) {
         User user = userRepository.findUserById(id);
         Response response;

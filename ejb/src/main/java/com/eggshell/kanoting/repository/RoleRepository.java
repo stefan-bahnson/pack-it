@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.repository;
 
 
-import com.eggshell.kanoting.model.Group;
+import com.eggshell.kanoting.model.Role;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class FactionRepository extends Repository {
+public class RoleRepository extends Repository {
 
 
     /**
@@ -21,7 +21,7 @@ public class FactionRepository extends Repository {
 
         User userForMerge = getEm().getReference(User.class, user.id);
 
-        Stream<Group> filteredGroups = user.roles.stream()
+        Stream<Role> filteredGroups = user.roles.stream()
                 .filter(userForMerge.roles::contains);
 
         userForMerge.roles = filteredGroups

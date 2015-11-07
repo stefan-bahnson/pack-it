@@ -4,6 +4,9 @@ package com.eggshell.kanoting.repository;
 import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
+
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
@@ -13,8 +16,13 @@ import java.security.spec.InvalidKeySpecException;
 @Stateless
 public class UserRepository extends Repository {
 
+    @Resource
+    SessionContext ctx;
 
     public User findUserById(long id) {
+        if(ctx.isCallerInRole("admin")) {
+            System.out.println("hej");
+        }
         return find(User.class, id);
     }
 

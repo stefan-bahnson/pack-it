@@ -1,11 +1,11 @@
 package com.eggshell.kanoting.repository;
 
-import com.eggshell.kanoting.data.User;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,10 +32,11 @@ public class PackListRepository extends Repository {
         delete(PackList.class, packList.id);
     }
 
-    public void deleteItemsFromPackList(PackList packList) {
+    public void deleteItemsFromPackList(long id, List<Item> items) {
 
-        PackList attachedPacklist = findPackListById(packList.id);
-        Stream<Item> filteredItems = packList.items.stream()
+        PackList attachedPacklist = findPackListById(id);
+
+        Stream<Item> filteredItems = items.stream()
                 .filter(attachedPacklist.items::contains);
 
         attachedPacklist.items = filteredItems

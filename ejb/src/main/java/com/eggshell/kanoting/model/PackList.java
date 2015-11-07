@@ -1,19 +1,17 @@
 package com.eggshell.kanoting.model;
 
+import javax.enterprise.inject.Decorated;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "packlist")
-public class PackList implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+public class PackList extends BaseEntity implements Serializable {
 
     public String name;
 
