@@ -16,16 +16,11 @@ import java.util.Set;
 @XmlRootElement
 @Entity
 @Table(name = "user")
-public class User implements Serializable, Principal {
+public class User extends BaseEntity implements Principal {
 
     public static final String FIND_BY_EMAIL = "User.findByEmail";
     public static final String FIND_BY_ID = "User.findById";
     public static final String SELECT_FROM_WHERE = "SELECT u FROM User u WHERE u.";
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
 
     @NotNull
     public String name;

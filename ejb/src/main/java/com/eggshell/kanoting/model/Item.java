@@ -12,11 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "item")
-public class Item implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+public class Item extends BaseEntity {
 
     @NotNull
     public String name;
