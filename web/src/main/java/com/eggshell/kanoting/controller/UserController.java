@@ -12,10 +12,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -32,15 +29,25 @@ public class UserController extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
     @RolesAllowed({Roles.LOGGED_IN})
-    public Response getUser(@PathParam("userId") long id) {
+    public Response getUser(@PathParam("userId") long id, @Context Request request) {
+        Response.ResponseBuilder builder;
         User user = userRepository.findUserById(id, loggedInUserId());
-        Response response;
-        if(user == null) {
-           response = Response.noContent().header("cause: ", "No entity found for: " + id).build();
+
+        // Set up cache properties
+        CacheControl cc = new CacheControl();
+        cc.setMaxAge(86400);
+        EntityTag eTag = new EntityTag(Integer.toString(user.hashCode()));
+        builder = request.evaluatePreconditions(eTag);
+
+
+        if(builder == null)  {
+            builder = Response.ok().entity(user).tag(eTag);
         } else {
-            response = Response.ok().entity(user).build();
+            System.out.println("failed");
         }
-        return response;
+
+        builder.cacheControl(cc);
+        return builder.build();
     }
 
     @POST

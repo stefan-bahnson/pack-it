@@ -43,6 +43,7 @@ public class Authenticate implements ContainerRequestFilter {
         User user = null;
         boolean authenticated = false;
         try {
+            System.out.println(basicAuth.username());
             user = userRepository.findUserByEmail(basicAuth.username());
             authenticated = userRepository.authenticate(user, basicAuth.password());
         } catch(NoResultException|EJBException e) {}

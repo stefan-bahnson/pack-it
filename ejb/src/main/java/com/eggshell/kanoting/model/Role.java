@@ -35,4 +35,11 @@ public class Role implements Serializable {
         Role role = (Role) obj;
         return role.name.equals(this.name);
     }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }
