@@ -6,7 +6,7 @@ import com.eggshell.kanoting.model.parents.BaseEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-
+// Daniel Laine was here
 @Entity
 @Table(name = "item")
 public class Item extends BaseEntity {

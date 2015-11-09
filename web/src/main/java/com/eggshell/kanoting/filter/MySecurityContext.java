@@ -7,7 +7,7 @@ import com.eggshell.kanoting.security.Roles;
 
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
-
+// Daniel Laine was here
 public class MySecurityContext implements SecurityContext {
 
     private User user;

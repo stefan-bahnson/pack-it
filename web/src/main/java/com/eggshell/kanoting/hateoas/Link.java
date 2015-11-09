@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.hateoas;
 
 import java.io.Serializable;
-
+// Daniel Laine was here
 /**
  * Created by tailage on 11/9/15.
  */

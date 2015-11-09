@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-
+// Daniel Laine was here
 @RolesAllowed(Roles.LOGGED_IN)
 @Path("/wishlists")
 public class WishListController extends BaseController {

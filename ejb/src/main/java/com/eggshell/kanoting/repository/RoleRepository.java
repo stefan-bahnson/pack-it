@@ -7,7 +7,7 @@ import com.eggshell.kanoting.repository.parent.Repository;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+// Daniel Laine was here
 
 public class RoleRepository extends Repository {
 

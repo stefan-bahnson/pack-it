@@ -1,5 +1,5 @@
 package com.eggshell.kanoting.exceptions;
-
+// Daniel Laine was here
 public class UnauthorizedException extends RuntimeException {
 
     @Override

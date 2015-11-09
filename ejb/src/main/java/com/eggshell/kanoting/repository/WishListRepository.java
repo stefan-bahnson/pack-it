@@ -5,7 +5,7 @@ import com.eggshell.kanoting.repository.parent.Repository;
 
 import javax.ejb.Stateless;
 
-
+// Daniel Laine was here
 @Stateless
 public class WishListRepository extends Repository {
 

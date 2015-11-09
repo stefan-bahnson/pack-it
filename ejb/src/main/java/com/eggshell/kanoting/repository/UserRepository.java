@@ -12,7 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-
+// Daniel Laine was here
 @Stateless
 public class UserRepository extends Repository {
 

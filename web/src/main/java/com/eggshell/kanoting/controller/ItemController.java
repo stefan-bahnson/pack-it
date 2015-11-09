@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-
+// Daniel Laine was here
 @RolesAllowed(Roles.LOGGED_IN)
 @Path("/items")
 public class ItemController extends BaseController{

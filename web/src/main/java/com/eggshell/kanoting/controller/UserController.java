@@ -17,6 +17,8 @@ import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
+
+// Daniel Laine was here
 @Path("/users")
 public class UserController extends BaseController {
 
