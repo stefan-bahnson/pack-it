@@ -11,7 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
-// Daniel Laine was here
 @Path("/login")
 public class LoginController {
 

@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-// Daniel Laine was here
 public class PasswordHashes {
 
     public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";

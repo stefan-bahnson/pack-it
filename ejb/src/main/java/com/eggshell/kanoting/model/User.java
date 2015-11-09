@@ -17,7 +17,6 @@ import java.util.Set;
 @XmlRootElement
 @Entity
 @Table(name = "user")
-// Daniel Laine was here
 public class User extends BaseEntity implements Principal {
 
     public static final String FIND_BY_EMAIL = "User.findByEmail";

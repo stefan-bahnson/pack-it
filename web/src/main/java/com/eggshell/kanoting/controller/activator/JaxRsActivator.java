@@ -9,7 +9,6 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.Set;
-// Daniel Laine was here
 @ApplicationPath("/")
 public class JaxRsActivator extends Application {
 

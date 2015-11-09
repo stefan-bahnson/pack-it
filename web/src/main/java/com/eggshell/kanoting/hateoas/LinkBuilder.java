@@ -4,7 +4,6 @@ import javax.ws.rs.core.UriInfo;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-// Daniel Laine was here
 /**
  * Created by tailage on 11/9/15.
  */

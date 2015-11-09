@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 @Entity
 // group is a keyword in MySQL so we need to use 'faction' instead
-// Daniel Laine was here
 @Table(name = "role")
 public class Role implements Serializable {
 
