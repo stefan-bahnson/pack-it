@@ -1,4 +1,4 @@
-package com.eggshell.kanoting;
+package com.eggshell.kanoting.exception.mappers;
 
 
 import com.eggshell.kanoting.controller.objects.Error;
