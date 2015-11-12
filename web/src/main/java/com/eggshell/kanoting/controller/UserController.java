@@ -2,7 +2,9 @@ package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.controller.parent.BaseController;
+import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.User;
+import com.eggshell.kanoting.repository.PackListRepository;
 import com.eggshell.kanoting.repository.UserRepository;
 import com.eggshell.kanoting.security.Roles;
 
@@ -12,10 +14,12 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 
+import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.*;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
 
 @Path("/users")
@@ -25,6 +29,12 @@ public class UserController extends BaseController {
 
     @Inject
     UserRepository userRepository;
+
+    @Inject
+    PackListRepository packListRepository;
+
+    @Context
+    ResourceContext rc;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -49,6 +59,17 @@ public class UserController extends BaseController {
 
         builder.cacheControl(cc);
         return builder.build();
+    }
+
+    /*
+     * Is not secure atm
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{userId}/packlists")
+    public Response getPacklistsOfUser(@PathParam("userId") long userId) {
+        List<PackList> packLists = packListRepository.findPackListsByUser(userId);
+        return Response.ok().entity(packLists).build();
     }
 
     @POST
