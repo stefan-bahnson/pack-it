@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 
+import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.*;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
@@ -22,6 +23,10 @@ import java.security.spec.InvalidKeySpecException;
 public class UserController extends BaseController {
 
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/users");
+
+    // TODO: context for resources to let the container manage the instances
+    @Context
+    ResourceContext rc;
 
     @Inject
     UserRepository userRepository;
@@ -89,4 +94,13 @@ public class UserController extends BaseController {
 //        userRepository.updateUser(user);
 //    }
 
+    /*
+        loactor methods
+    */
+
+    // TODO: locator method for PackLists
+    @Path("{userId}/packlists")
+    public PackListController locatePackList() {
+        return rc.getResource(PackListController.class);
+    }
 }

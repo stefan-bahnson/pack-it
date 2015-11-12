@@ -14,7 +14,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 @RolesAllowed(Roles.LOGGED_IN)
-@Path("/packlists")
 public class PackListController extends BaseController {
 
     @Inject
