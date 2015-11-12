@@ -1,9 +1,9 @@
 package com.eggshell.kanoting.controller.activator;
 
-import com.eggshell.kanoting.EJBExceptionMapper;
+import com.eggshell.kanoting.exception.mappers.EJBExceptionMapper;
 import com.eggshell.kanoting.controller.*;
+import com.eggshell.kanoting.exception.mappers.WebApplicationExceptionMapper;
 import com.eggshell.kanoting.filter.Authenticate;
-import com.eggshell.kanoting.filter.MySecurityContext;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.ws.rs.ApplicationPath;
@@ -28,6 +28,7 @@ public class JaxRsActivator extends Application {
         resources.add(RolesAllowedDynamicFeature.class);
         resources.add(Authenticate.class);
         resources.add(EJBExceptionMapper.class);
+        resources.add(WebApplicationExceptionMapper.class);
 
         return resources;
     }
