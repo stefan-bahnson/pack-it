@@ -12,6 +12,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
+
 @Stateless
 public class UserRepository extends Repository {
 

@@ -95,4 +95,6 @@ public abstract class Repository {
     protected Logger getLogger() {
         return logger;
     }
+
+
 }

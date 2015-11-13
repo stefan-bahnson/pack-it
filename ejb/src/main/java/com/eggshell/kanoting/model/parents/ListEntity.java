@@ -5,10 +5,13 @@ import com.eggshell.kanoting.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
+@XmlRootElement
 @MappedSuperclass
 public abstract class ListEntity extends BaseEntity {
 
@@ -17,6 +20,7 @@ public abstract class ListEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     public Set<Item> items;
 
+    @XmlTransient
     @NotNull
     @ManyToOne
     public User user;
