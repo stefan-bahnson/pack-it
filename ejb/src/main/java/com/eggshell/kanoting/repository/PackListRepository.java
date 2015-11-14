@@ -3,15 +3,23 @@ package com.eggshell.kanoting.repository;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.User;
+import com.eggshell.kanoting.model.WishList;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.NamedQuery;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 @Stateless
 public class PackListRepository extends Repository {
 
+    public List<PackList> findPackListsByUser(long userId) {
+        TypedQuery<PackList> query = getEm().createNamedQuery("PackList.findByUsers", PackList.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
 
     public PackList findPackListById(long id, long userId) {
         return find(id, userId, PackList.class);
@@ -41,23 +49,5 @@ public class PackListRepository extends Repository {
 
         attachedPacklist.items = filteredItems
                 .collect(Collectors.toSet());
-    }
-
-    public List<PackList> findPackListsByUserId(long userId) {
-        List<PackList> foundPls = getEm().createNamedQuery("PackList.findPackListByUserId", PackList.class)
-                .setParameter("userId", userId)
-                .getResultList();
-        if (foundPls.isEmpty())
-            throw new EntityNotFoundException("No pack lists for user " + userId + " could be found");
-
-        return foundPls;
-    }
-
-    public List<PackList> findAll() {
-        List<PackList> foundPls = getEm().createNamedQuery("PackList.findALL", PackList.class).getResultList();
-        if (foundPls.isEmpty())
-            throw new EntityNotFoundException("No packlists found");
-
-        return foundPls;
     }
 }
