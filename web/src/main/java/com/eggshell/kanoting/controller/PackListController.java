@@ -19,6 +19,7 @@ import java.util.List;
 @RolesAllowed(Roles.LOGGED_IN)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Path("/packlists")
 public class PackListController extends BaseController {
 
     @Inject
@@ -59,14 +60,5 @@ public class PackListController extends BaseController {
     @Path("/{id}/items")
     public void deleteItemFromPackList(@PathParam("id") long id, List<Item> items) {
         packListRepository.deleteItemsFromPackList(id, loggedInUserId(), items);
-    }
-
-    /*
-        User related resources
-    */
-
-    @GET
-    public List<PackList> getAllUserPackLists(@PathParam("userId") long userId) {
-        return packListRepository.findPackListsByUserId(userId);
     }
 }

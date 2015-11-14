@@ -1,17 +1,16 @@
-package com.eggshell.kanoting.controller;
+package com.eggshell.kanoting.controller.user;
 
 import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.controller.parent.BaseController;
+import com.eggshell.kanoting.controller.user.subresources.UserPacklistsResource;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
 import com.eggshell.kanoting.security.Roles;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-
 import javax.validation.Valid;
 import javax.ws.rs.*;
-
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.*;
 import java.net.URI;
@@ -20,7 +19,7 @@ import java.security.spec.InvalidKeySpecException;
 
 
 @Path("/users")
-public class UserController extends BaseController {
+public class UsersResource extends BaseController {
 
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/users");
 
@@ -95,12 +94,12 @@ public class UserController extends BaseController {
 //    }
 
     /*
-        loactor methods
+        sub-resource locator methods
     */
 
     // TODO: locator method for PackLists
     @Path("{userId}/packlists")
-    public PackListController locatePackList() {
-        return rc.getResource(PackListController.class);
+    public UserPacklistsResource locatePackList() {
+        return rc.getResource(UserPacklistsResource.class);
     }
 }
