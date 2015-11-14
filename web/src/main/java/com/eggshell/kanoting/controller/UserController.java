@@ -110,4 +110,80 @@ public class UserController extends BaseController {
 //        userRepository.updateUser(user);
 //    }
 
+    /*
+        PackLists sub-resource specific actions.
+        Can be refactored to UserPacklistsCtrl if more than one entrypoint i.e.
+
+            /packlists
+            /users/user/packlists
+
+        else PacklistCtrl
+
+            /users/user/packlists
+
+    */
+
+    @GET
+    @Path("{userId}/packlists")
+    public List<PackList> getPacklistsByUserId(@PathParam("userId") long userId) {
+        return packListRepository.findPackListsByUser(userId);
+    }
+    @GET
+    @Path("{userId}/packlists/{packListId}")
+    public PackList getPacklistById(@PathParam("userId") long userId,
+                                           @PathParam("packListId") long packListId) {
+        return packListRepository.findPackListById(packListId, userId);
+    }
+
+    @POST
+    @Path("{userId}/packlists/{packListId}")
+    public void addUserToPackList(@PathParam("userId") long userId,
+                                  @PathParam("packListId") long packListId) {
+        // add user to packlist
+    }
+
+    @DELETE
+    @Path("{userId}/packlists/{packListId}")
+    public void removeUserFromPackList(@PathParam("userId") long userId,
+                                  @PathParam("packListId") long packListId) {
+        // remove user from packlist
+    }
+
+    /*
+        Addresses sub-resource specific actions
+        Can be refactored to UserAddressesCtrl if more than one entrypoint i.e.
+
+            /addresses
+            /users/user/addresses
+
+        else AddressesCtrl
+
+            /users/user/addresses
+    */
+
+    @GET
+    @Path("{userId}/adresses")
+    public void getAdressesByUserId(@PathParam("userId") long userId) {
+        // find addresses by user id
+    }
+    @GET
+    @Path("{userId}/adresses/{adressId}")
+    public void getAdressByUserId(@PathParam("userId") long userId,
+                                  @PathParam("adresstId") long adressId) {
+        // find address by user id and address id
+    }
+
+    @POST
+    @Path("{userId}/adresses/{adresstId}")
+    public void addAddressToUser(@PathParam("userId") long userId,
+                                  @PathParam("adresstId") long adresstId) {
+        // add user to packlist
+    }
+
+    @DELETE
+    @Path("{userId}/adresses/{adresstId}")
+    public void removeAddressFromUser(@PathParam("userId") long userId,
+                                       @PathParam("adresstId") long adresstId) {
+        // remove user from packlist
+    }
 }

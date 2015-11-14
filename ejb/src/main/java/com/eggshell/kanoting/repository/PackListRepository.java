@@ -3,10 +3,8 @@ package com.eggshell.kanoting.repository;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.User;
-import com.eggshell.kanoting.model.WishList;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
-import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +14,7 @@ import java.util.stream.Stream;
 public class PackListRepository extends Repository {
 
     public List<PackList> findPackListsByUser(long userId) {
-        TypedQuery<PackList> query = getEm().createNamedQuery("PackList.findByUsers", PackList.class);
+        TypedQuery<PackList> query = getEm().createNamedQuery("PackList.findAllByUserId", PackList.class);
         query.setParameter("userId", userId);
         return query.getResultList();
     }
