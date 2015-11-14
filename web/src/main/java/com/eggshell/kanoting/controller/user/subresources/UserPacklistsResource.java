@@ -12,6 +12,7 @@ import java.util.List;
 /**
  *
  */
+@Path("users/{userId}/packlists") // eliminates the use of locator methods but hard coded.
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserPacklistsResource extends BaseController{
@@ -21,7 +22,7 @@ public class UserPacklistsResource extends BaseController{
 
     @GET
     public List<PackList> getAllUserPackLists(@PathParam("userId") long userId) {
-        return packListRepository.findPackListsByUserId(userId);
+        return packListRepository.findPackListsByUser(userId);
     }
 
     /*

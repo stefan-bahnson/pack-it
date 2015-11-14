@@ -28,11 +28,6 @@ public class PackListController extends BaseController {
     UserRepository userRepository;
 
     @GET
-    public List<PackList> getALL() {
-        return packListRepository.findAll();
-    }
-
-    @GET
     @Path("/{packListId}")
     public PackList getPackList(@PathParam("packListId") long id) {
         return packListRepository.findPackListById(id, loggedInUserId());
