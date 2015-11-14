@@ -23,4 +23,13 @@ public class UserPacklistsResource extends BaseController{
     public List<PackList> getAllUserPackLists(@PathParam("userId") long userId) {
         return packListRepository.findPackListsByUserId(userId);
     }
+
+    /*
+        Restful approach to query params
+    */
+    @GET
+    @Path("name/{packListName}")
+    public String getByName(@PathParam("packListName") String name) {
+        return "{ \"hello\": " + "\"" + name + "\" }";
+    }
 }
