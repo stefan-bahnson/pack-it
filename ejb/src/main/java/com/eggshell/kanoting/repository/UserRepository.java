@@ -26,7 +26,13 @@ public class UserRepository extends Repository {
     }
 
     public User findUserByEmail(String email) {
-        return getEm().createNamedQuery(User.FIND_BY_EMAIL, User.class).setParameter("email", email).getSingleResult();
+        User user = getEm().createNamedQuery(User.FIND_BY_EMAIL, User.class)
+                .setParameter("email", email)
+                .getSingleResult();
+        if (user == null)
+            throw new NoResultException("No User matching email " + email);
+
+        return user;
     }
 
     /**
