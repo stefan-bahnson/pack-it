@@ -79,18 +79,12 @@ public class UsersController extends BaseController {
         return Response.ok().build();
     }
 
+    @GET
+    @Path("search")
+    public void searchUserName(@QueryParam("name") String name) {
 
-    /* -------------*/
-    /*              */
-    /*  Not needed  */
-    /*              */
-    /* -------------*/
+    }
 
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void updateUser(User user) {
-//        userRepository.updateUser(user);
-//    }
 
     /*
         sub-resource locator methods
