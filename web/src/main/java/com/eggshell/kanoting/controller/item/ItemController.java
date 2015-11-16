@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller;
+package com.eggshell.kanoting.controller.item;
 
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.Item;

@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller.user.subresources;
+package com.eggshell.kanoting.controller.user.subcontrollers;
 
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.PackList;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class UserPacklistsResource extends BaseController{
+public class UserPacklistsController extends BaseController{
 
     @Inject
     PackListRepository packListRepository;

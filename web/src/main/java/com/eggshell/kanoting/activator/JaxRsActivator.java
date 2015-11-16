@@ -1,11 +1,16 @@
-package com.eggshell.kanoting.controller.activator;
+package com.eggshell.kanoting.activator;
 
-import com.eggshell.kanoting.controller.user.UsersResource;
-import com.eggshell.kanoting.controller.user.subresources.UserPacklistsResource;
+import com.eggshell.kanoting.controller.item.ItemController;
+import com.eggshell.kanoting.controller.login.LoginController;
+import com.eggshell.kanoting.controller.packlist.PackListController;
+import com.eggshell.kanoting.controller.role.RoleController;
+import com.eggshell.kanoting.controller.root.RootController;
+import com.eggshell.kanoting.controller.user.UsersController;
+import com.eggshell.kanoting.controller.user.subcontrollers.UserPacklistsController;
+import com.eggshell.kanoting.controller.wishlist.WishListController;
 import com.eggshell.kanoting.exception.mappers.EJBExceptionMapper;
-import com.eggshell.kanoting.controller.*;
 import com.eggshell.kanoting.exception.mappers.WebApplicationExceptionMapper;
-import com.eggshell.kanoting.filter.Authenticate;
+import com.eggshell.kanoting.security.filter.Authenticate;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.ws.rs.ApplicationPath;
@@ -20,9 +25,9 @@ public class JaxRsActivator extends Application {
         Set<Class<?>> resources = new java.util.HashSet<>();
 
         resources.add(RootController.class);
-        resources.add(UserPacklistsResource.class);
+        resources.add(UserPacklistsController.class);
 
-        resources.add(UsersResource.class);
+        resources.add(UsersController.class);
         resources.add(RoleController.class);
         resources.add(ItemController.class);
         resources.add(PackListController.class);

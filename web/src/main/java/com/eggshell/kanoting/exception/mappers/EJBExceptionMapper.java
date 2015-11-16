@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.exception.mappers;
 
 
-import com.eggshell.kanoting.controller.objects.Error;
+import com.eggshell.kanoting.exception.mappers.objects.Error;
 import com.eggshell.kanoting.exceptions.UnauthorizedException;
 
 import javax.ejb.EJBException;

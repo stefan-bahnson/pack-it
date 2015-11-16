@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller;
+package com.eggshell.kanoting.controller.root;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

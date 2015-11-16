@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller.objects;
+package com.eggshell.kanoting.exception.mappers.objects;
 
 import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement

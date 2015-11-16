@@ -1,8 +1,6 @@
-package com.eggshell.kanoting.filter;
+package com.eggshell.kanoting.security.filter;
 
-import com.eggshell.kanoting.filter.helper.BasicAuthorization;
-import com.eggshell.kanoting.filter.helper.annotation.Secured;
-import com.eggshell.kanoting.model.Role;
+import com.eggshell.kanoting.security.filter.helper.BasicAuthorization;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
 import com.eggshell.kanoting.security.Roles;
@@ -11,18 +9,14 @@ import javax.annotation.Priority;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBException;
 import javax.inject.Inject;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+
 @RolesAllowed({Roles.LOGGED_IN})
 @Provider
 @Priority(Priorities.AUTHENTICATION)
