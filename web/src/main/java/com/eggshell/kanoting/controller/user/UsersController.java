@@ -6,6 +6,7 @@ import com.eggshell.kanoting.controller.user.subcontrollers.UserPacklistsControl
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
 import com.eggshell.kanoting.security.Roles;
+import org.hibernate.validator.constraints.Email;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -34,7 +35,7 @@ public class UsersController extends BaseController {
     @GET
     @Path("/{userId}")
     @RolesAllowed({Roles.LOGGED_IN})
-    public Response getUser(@PathParam("userId") long id, @Context Request request) {
+    public Response getUserById(@PathParam("userId") long id, @Context Request request) {
         Response.ResponseBuilder builder;
         User user = userRepository.findUserById(id, loggedInUserId());
 
@@ -53,6 +54,14 @@ public class UsersController extends BaseController {
 
         builder.cacheControl(cc);
         return builder.build();
+    }
+
+    @GET
+    @Path("{email}")
+    public Response getUserByEmail(@PathParam("email") @Email String email) {
+        User userByEmail = userRepository.findUserByEmail(email);
+
+        return Response.ok(userByEmail).build();
     }
 
     @POST
@@ -78,19 +87,23 @@ public class UsersController extends BaseController {
         return Response.ok().build();
     }
 
+
+    /*
+        Query param method by name
+    */
     @GET
     @Path("search")
-    public Response searchUserName(@QueryParam("name") String name) {
+    public Response searchByUserName(@QueryParam("name") String name) {
         List<User> usersByName = userRepository.findUserByName(name);
 
         return Response.ok(usersByName).build();
     }
 
 
-    /*
-        sub-resource locator methods
-    */
 
+    /*
+        sub-resource locator method for PackList
+    */
     @Path("{userId}/packlists")
     public UserPacklistsController locatePackList() {
         return rc.getResource(UserPacklistsController.class);
