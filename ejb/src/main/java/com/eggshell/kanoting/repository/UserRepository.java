@@ -30,7 +30,10 @@ public class UserRepository extends Repository {
     }
 
     /**
-     * Find all users matching name param.
+     * <p>Find all users matching name param. Partial match is accepted as
+     * long as the letters appear in that order and is not case sensitive.</p>
+     *
+     * e.g. "fr" will match both "[Fr]ed" and Al[fr]ed"
      *
      * @param name query param for name
      * @return list of {@link User}s
@@ -38,7 +41,7 @@ public class UserRepository extends Repository {
     @SuppressWarnings("unchecked")
     public List<User> findUserByName(String name) {
         List<User> users = getEm().createQuery("select u from User u where u.name like :name")
-                .setParameter("name", name)
+                .setParameter("name", "%" + name + "%")
                 .getResultList();
         if (users == null)
             throw new NoResultException("No Users matching name " + name);

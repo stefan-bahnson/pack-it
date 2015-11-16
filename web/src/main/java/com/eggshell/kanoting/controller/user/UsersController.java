@@ -16,8 +16,10 @@ import javax.ws.rs.core.*;
 import java.net.URI;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
-
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("/users")
 public class UsersController extends BaseController {
 
@@ -30,7 +32,6 @@ public class UsersController extends BaseController {
     UserRepository userRepository;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
     @RolesAllowed({Roles.LOGGED_IN})
     public Response getUser(@PathParam("userId") long id, @Context Request request) {
@@ -55,7 +56,6 @@ public class UsersController extends BaseController {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         user.password = PasswordHashes.createHash(user.password);
@@ -72,7 +72,6 @@ public class UsersController extends BaseController {
 
 
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @RolesAllowed({"logged_in"})
     public Response deleteUser(User user) {
         userRepository.deleteUser(loggedInUserId(), user);
@@ -81,8 +80,10 @@ public class UsersController extends BaseController {
 
     @GET
     @Path("search")
-    public void searchUserName(@QueryParam("name") String name) {
+    public Response searchUserName(@QueryParam("name") String name) {
+        List<User> usersByName = userRepository.findUserByName(name);
 
+        return Response.ok(usersByName).build();
     }
 
 
