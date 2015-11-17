@@ -57,8 +57,9 @@ public class UsersController extends BaseController {
     }
 
     @GET
-    @Path("{email}")
-    public Response getUserByEmail(@PathParam("email") @Email String email) {
+    @Email
+    @Path("by_email/{email}")
+    public Response getUserByEmail(@PathParam("email") String email) {
         User userByEmail = userRepository.findUserByEmail(email);
 
         return Response.ok(userByEmail).build();

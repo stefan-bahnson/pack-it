@@ -26,11 +26,15 @@ public class UserRepository extends Repository {
     }
 
     public User findUserByEmail(String email) {
-        User user = getEm().createNamedQuery(User.FIND_BY_EMAIL, User.class)
-                .setParameter("email", email)
-                .getSingleResult();
-        if (user == null)
+        User user = null;
+        try {
+            user = getEm().createNamedQuery(User.FIND_BY_EMAIL, User.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
             throw new NoResultException("No User matching email " + email);
+        }
+
 
         return user;
     }
@@ -49,7 +53,7 @@ public class UserRepository extends Repository {
         List<User> users = getEm().createQuery("select u from User u where u.name like :name")
                 .setParameter("name", "%" + name + "%")
                 .getResultList();
-        if (users == null)
+        if (users.isEmpty())
             throw new NoResultException("No Users matching name " + name);
 
         return users;
