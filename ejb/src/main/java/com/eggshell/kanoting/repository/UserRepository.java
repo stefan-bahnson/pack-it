@@ -8,6 +8,7 @@ import com.eggshell.kanoting.repository.parent.Repository;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolationException;
@@ -21,6 +22,12 @@ public class UserRepository extends Repository {
     @Resource
     SessionContext ctx;
 
+    @SuppressWarnings("unchecked")
+    public List<User> findAll() {
+        List<User> users = getEm().createQuery("select u from User u").getResultList();
+        return users;
+    }
+
     public User findUserById(long id, long userId) {
         return find(id, userId, User.class);
     }
@@ -32,9 +39,8 @@ public class UserRepository extends Repository {
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException ex) {
-            throw new NoResultException("No User matching email " + email);
+            throw new NoResultException("No Users found matching email " + email); // fixme: bad idea throwing nre. return?
         }
-
 
         return user;
     }
@@ -54,23 +60,28 @@ public class UserRepository extends Repository {
                 .setParameter("name", "%" + name + "%")
                 .getResultList();
         if (users.isEmpty())
-            throw new NoResultException("No Users matching name " + name);
+            throw new NoResultException("No Users found matching name " + name); // fixme: bad idea throwing nre. return?
 
         return users;
     }
 
+    // fixme: creates new user every time. filter?
     public void updateUser(long userId, User user) {
-        if(getEm().getReference(User.class, user.id) != null) {
+        User userRef = getEm().getReference(User.class, user.id);
+
+        if (userRef != null)
             update(userId, user);
-        }
     }
 
     public User addUser(User user) {
         return add(user);
     }
 
-    public void deleteUser(long userId, User user) {
-        delete(user.id, userId, User.class);
+    /*
+        All we need is the id. Is there a good reason for sending an object?
+    */
+    public void deleteUser(long userId) {
+        delete(userId, User.class);
     }
 
     public boolean authenticate(User user, String password) {

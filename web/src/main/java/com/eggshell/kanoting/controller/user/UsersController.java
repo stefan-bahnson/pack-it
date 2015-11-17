@@ -32,6 +32,26 @@ public class UsersController extends BaseController {
     @Inject
     UserRepository userRepository;
 
+    /*
+        create
+        get all
+        get one by id
+        get one by email
+        get many by name
+        TODO: update
+        delete
+
+        locator packlists
+    */
+
+    @GET
+    public Response getAll() {
+        List<User> users = userRepository.findAll();
+
+        return Response.ok(users).build();
+    }
+
+
     @GET
     @Path("/{userId}")
     @RolesAllowed({Roles.LOGGED_IN})
@@ -57,16 +77,16 @@ public class UsersController extends BaseController {
     }
 
     @GET
-    @Email
     @Path("by_email/{email}")
-    public Response getUserByEmail(@PathParam("email") String email) {
+    public Response getUserByEmail(
+            @Email @PathParam("email") String email) {
         User userByEmail = userRepository.findUserByEmail(email);
 
         return Response.ok(userByEmail).build();
     }
 
     @POST
-    public Response addUser(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Response create(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         user.password = PasswordHashes.createHash(user.password);
 
@@ -80,11 +100,18 @@ public class UsersController extends BaseController {
         return Response.created(uri).link(resourceUri, "self").build();
     }
 
+    @PUT
+    @Path("{userId}")
+    public Response update(@PathParam("userId") long userId, User user) {
+        userRepository.updateUser(userId, user);
+
+        return Response.noContent().build();
+    }
 
     @DELETE
-    @RolesAllowed({"logged_in"})
-    public Response deleteUser(User user) {
-        userRepository.deleteUser(loggedInUserId(), user);
+    @Path("{userId}")
+    public Response deleteUser(@PathParam("userId") long userId) {
+        userRepository.deleteUser(userId);
         return Response.ok().build();
     }
 
