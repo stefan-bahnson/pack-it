@@ -1,9 +1,8 @@
-package com.eggshell.kanoting.controller.activator;
+package com.eggshell.kanoting;
 
-import com.eggshell.kanoting.EJBExceptionMapper;
+import com.eggshell.kanoting.exceptions.mappers.EJBExceptionMapper;
 import com.eggshell.kanoting.controller.*;
-import com.eggshell.kanoting.filter.Authenticate;
-import com.eggshell.kanoting.filter.MySecurityContext;
+import com.eggshell.kanoting.security.filter.Authenticate;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import javax.ws.rs.ApplicationPath;

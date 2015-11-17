@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.filter;
+package com.eggshell.kanoting.security.filter;
 
 
 import com.eggshell.kanoting.model.Role;

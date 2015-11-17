@@ -1,6 +1,4 @@
-package com.eggshell.kanoting.filter.helper.annotation;
-
-import com.eggshell.kanoting.filter.helper.annotation.Role;
+package com.eggshell.kanoting.security.filter.helper.annotation;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.ElementType;

@@ -61,17 +61,6 @@ public class UserController extends BaseController {
         return builder.build();
     }
 
-    /*
-     * Is not secure atm
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{userId}/packlists")
-    public Response getPacklistsOfUser(@PathParam("userId") long userId) {
-        List<PackList> packLists = packListRepository.findPackListsByUser(userId);
-        return Response.ok().entity(packLists).build();
-    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -88,13 +77,24 @@ public class UserController extends BaseController {
         return Response.created(uri).link(resourceUri, "self").build();
     }
 
-
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @RolesAllowed({"logged_in"})
     public Response deleteUser(User user) {
         userRepository.deleteUser(loggedInUserId(), user);
         return Response.ok().build();
+    }
+
+
+    /*
+     * Is not secure atm
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{userId}/packlists")
+    public Response getPacklistsOfUser(@PathParam("userId") long userId) {
+        List<PackList> packLists = packListRepository.findPackListsByUser(userId);
+        return Response.ok().entity(packLists).build();
     }
 
 

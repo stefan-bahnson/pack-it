@@ -9,6 +9,7 @@ import java.util.List;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;

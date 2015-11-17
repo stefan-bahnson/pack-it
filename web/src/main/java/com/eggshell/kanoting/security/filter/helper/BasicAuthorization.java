@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.filter.helper;
+package com.eggshell.kanoting.security.filter.helper;
 import javax.xml.bind.DatatypeConverter;
 public class BasicAuthorization {
 
