@@ -46,8 +46,9 @@ public class PackListController extends BaseController {
     }
 
     @DELETE
-    public void deletePackList(PackList packList) {
-        packListRepository.deletePacklist(loggedInUserId(), packList);
+    @Path("{packlistId}")
+    public void delete(@PathParam("packlistId") long packlistId) {
+        packListRepository.deletePacklist(packlistId);
     }
 
     /**

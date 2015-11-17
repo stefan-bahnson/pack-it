@@ -14,7 +14,7 @@ public class ItemRepository extends Repository {
         return add(item);
     }
 
-    public void deleteItem(long userId, Item item) {
-        delete(item.id, userId, Item.class);
+    public void deleteItem(long itemId, Item item) {
+        delete(itemId, Item.class);
     }
 }

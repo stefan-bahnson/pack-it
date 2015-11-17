@@ -21,7 +21,7 @@ public class WishListRepository extends Repository {
         update(userId, wishList);
     }
 
-    public void deleteWishList(long userId, WishList wishList) {
-        delete(userId, wishList.id, WishList.class);
+    public void deleteWishList(long wishListId, WishList wishList) {
+        delete(wishListId, WishList.class);
     }
 }

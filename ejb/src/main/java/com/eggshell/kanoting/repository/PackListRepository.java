@@ -28,8 +28,11 @@ public class PackListRepository extends Repository {
         update(userId, packList);
     }
 
-    public void deletePacklist(long userId, PackList packList) {
-        delete(packList.id, userId, PackList.class);
+    /*
+        again, why do we need to send an object?
+    */
+    public void deletePacklist(long packlistId) {
+        delete(packlistId, PackList.class);
     }
 
     public void deleteItemsFromPackList(long id, long userId, List<Item> items) {

@@ -41,28 +41,28 @@ public abstract class Repository {
 
     }
 
-
+    // fixme: auth turned off
     public <T extends BaseEntity> T find(long id, long userId, Class<T> type) {
-        if(!isAuthorized(id, userId, type)) {
-            throw new UnauthorizedException();
-        }
+//        if(!isAuthorized(id, userId, type)) {
+//            throw new UnauthorizedException();
+//        }
         return em.find(type, id);
     }
 
 
-
+    // fixme: auth turned off
     protected <T extends BaseEntity> T update(long userId, T entity) {
-        if(!isAuthorized(entity.id, userId, entity.getClass())) {
-            throw new UnauthorizedException();
-        }
+//        if(!isAuthorized(entity.id, userId, entity.getClass())) {
+//            throw new UnauthorizedException();
+//        }
         return em.merge(entity);
     }
 
-
-    protected <T extends BaseEntity> void delete(long id, long userId, Class<T> type) {
-        if(!isAuthorized(id, userId, type)) {
-            throw new UnauthorizedException();
-        }
+    // fixme: auth turned off
+    protected <T extends BaseEntity> void delete(long id, Class<T> type) {
+//        if(!isAuthorized(id, userId, type)) {
+//            throw new UnauthorizedException();
+//        }
         Object ref = em.getReference(type, id);
         em.remove(ref);
 
