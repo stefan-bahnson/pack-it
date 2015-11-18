@@ -20,8 +20,8 @@ public abstract class ListEntity extends BaseEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     public Set<Item> items;
 
-    @XmlTransient
-    @NotNull
+//    @XmlTransient
+//    @NotNull
     @ManyToOne
     public User user;
 
@@ -32,8 +32,8 @@ public abstract class ListEntity extends BaseEntity {
     @PrePersist
     protected void onCreated() {
         created = new Date();
-        authorizedUsers = new ArrayList<>();
-        authorizedUsers.add(user);
+//        authorizedUsers = new ArrayList<>();
+//        authorizedUsers.add(user);
     }
 
     @PreUpdate

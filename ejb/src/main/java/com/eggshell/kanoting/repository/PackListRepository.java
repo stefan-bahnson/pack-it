@@ -6,6 +6,8 @@ import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,9 +20,10 @@ public class PackListRepository extends Repository {
     }
 
     public void addPackList(PackList packList) {
-        User userForAdd = getEm().find(User.class, packList.user.id);
-        if(userForAdd != null) {
-            add(packList);
+        try {
+            add(packList); // can throw hibernate ConstraintViolationEx
+        } catch (PersistenceException ex) {
+            System.out.println("Can not persist packlist for unknown user with id " + packList.user.id);
         }
     }
 
