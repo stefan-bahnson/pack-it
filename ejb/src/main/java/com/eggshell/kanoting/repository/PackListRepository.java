@@ -13,8 +13,8 @@ import java.util.stream.Stream;
 public class PackListRepository extends Repository {
 
 
-    public PackList findPackListById(long id, long userId) {
-        return find(id, userId, PackList.class);
+    public PackList findPackListById(long packlistId) {
+        return find(packlistId, PackList.class);
     }
 
     public void addPackList(PackList packList) {
@@ -35,9 +35,9 @@ public class PackListRepository extends Repository {
         delete(packlistId, PackList.class);
     }
 
-    public void deleteItemsFromPackList(long id, long userId, List<Item> items) {
+    public void deleteItemsFromPackList(long id, List<Item> items) {
 
-        PackList attachedPacklist = findPackListById(id, userId);
+        PackList attachedPacklist = findPackListById(id);
 
         Stream<Item> filteredItems = items.stream()
                 .filter(attachedPacklist.items::contains);

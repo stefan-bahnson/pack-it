@@ -9,8 +9,8 @@ import javax.ejb.Stateless;
 public class WishListRepository extends Repository {
 
 
-    public WishList findWishListById(long id, long userId) {
-        return find(id, userId, WishList.class);
+    public WishList findWishListById(long id) {
+        return find(id, WishList.class);
     }
 
     public void addWishList(long userId, WishList wishList) {

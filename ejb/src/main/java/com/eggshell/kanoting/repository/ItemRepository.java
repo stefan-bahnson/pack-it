@@ -6,8 +6,8 @@ import javax.ejb.Stateless;
 @Stateless
 public class ItemRepository extends Repository {
 
-    public Item findItemById(long id, long userId) {
-        return find(id, userId, Item.class);
+    public Item findItemById(long itemId) {
+        return find(itemId, Item.class);
     }
 
     public Item addItem(Item item) {

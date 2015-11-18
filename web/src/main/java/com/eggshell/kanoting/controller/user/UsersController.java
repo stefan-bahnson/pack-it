@@ -57,7 +57,7 @@ public class UsersController extends BaseController {
     @RolesAllowed({Roles.LOGGED_IN})
     public Response getUserById(@PathParam("userId") long id, @Context Request request) {
         Response.ResponseBuilder builder;
-        User user = userRepository.findUserById(id, loggedInUserId());
+        User user = userRepository.findUserById(id);
 
         // Set up cache properties
         CacheControl cc = new CacheControl();

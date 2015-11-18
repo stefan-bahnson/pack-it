@@ -21,7 +21,7 @@ public class WishListController extends BaseController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{wishListId}")
     public WishList getWishList(@PathParam("wishListId") long id) {
-        return wishListRepository.findWishListById(id, loggedInUserId());
+        return wishListRepository.findWishListById(id);
     }
 
     @POST

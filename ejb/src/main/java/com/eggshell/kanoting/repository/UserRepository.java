@@ -28,8 +28,8 @@ public class UserRepository extends Repository {
         return users;
     }
 
-    public User findUserById(long id, long userId) {
-        return find(id, userId, User.class);
+    public User findUserById(long userId) {
+        return find(userId, User.class);
     }
 
     public User findUserByEmail(String email) {

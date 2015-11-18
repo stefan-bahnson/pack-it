@@ -42,7 +42,7 @@ public abstract class Repository {
     }
 
     // fixme: auth turned off
-    public <T extends BaseEntity> T find(long id, long userId, Class<T> type) {
+    public <T extends BaseEntity> T find(long id, Class<T> type) {
 //        if(!isAuthorized(id, userId, type)) {
 //            throw new UnauthorizedException();
 //        }

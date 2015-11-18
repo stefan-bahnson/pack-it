@@ -13,7 +13,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@RolesAllowed(Roles.LOGGED_IN)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/packlists")
@@ -31,8 +30,8 @@ public class PackListController extends BaseController {
 
     @GET
     @Path("/{packListId}")
-    public PackList getPackList(@PathParam("packListId") long id) {
-        return packListRepository.findPackListById(id, loggedInUserId());
+    public PackList getPackList(@PathParam("packListId") long packlistId) {
+        return packListRepository.findPackListById(packlistId);
     }
 
     @POST
@@ -57,6 +56,6 @@ public class PackListController extends BaseController {
     @DELETE
     @Path("/{id}/items")
     public void deleteItemFromPackList(@PathParam("id") long id, List<Item> items) {
-        packListRepository.deleteItemsFromPackList(id, loggedInUserId(), items);
+        packListRepository.deleteItemsFromPackList(id, items);
     }
 }

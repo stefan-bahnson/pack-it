@@ -27,7 +27,7 @@ public class ItemController extends BaseController{
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{itemId}")
     public Response getItem(@PathParam("itemId") long id) {
-        Item item = itemRepository.findItemById(id, loggedInUserId());
+        Item item = itemRepository.findItemById(id);
 
         Response response;
 
