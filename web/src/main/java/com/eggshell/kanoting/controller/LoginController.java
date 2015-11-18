@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller.login;
+package com.eggshell.kanoting.controller;
 
 
 import com.eggshell.kanoting.model.User;

@@ -1,8 +1,7 @@
-package com.eggshell.kanoting.controller.user;
+package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.controller.parent.BaseController;
-import com.eggshell.kanoting.controller.user.subcontrollers.UserPacklistsController;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
 import com.eggshell.kanoting.security.Roles;
@@ -38,7 +37,7 @@ public class UsersController extends BaseController {
         get one by id
         get one by email
         get many by name
-        TODO: update
+        update
         delete
 
         locator packlists
@@ -125,15 +124,5 @@ public class UsersController extends BaseController {
         List<User> usersByName = userRepository.findUserByName(name);
 
         return Response.ok(usersByName).build();
-    }
-
-
-
-    /*
-        sub-resource locator method for PackList
-    */
-    @Path("{userId}/packlists")
-    public UserPacklistsController locatePackList() {
-        return rc.getResource(UserPacklistsController.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.controller.wishlist;
+package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.WishList;
