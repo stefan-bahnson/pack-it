@@ -70,7 +70,7 @@ public class UserRepository extends Repository {
         user.setId(userId);
 
         if (userRef != null)
-            update(userId, user); // userId provided to not break func for other repos but not used.
+            update(user);
     }
 
     public User addUser(User user) {

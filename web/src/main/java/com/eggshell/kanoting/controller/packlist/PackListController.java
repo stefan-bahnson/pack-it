@@ -25,6 +25,10 @@ public class PackListController extends BaseController {
 
     /*
         create packlist
+        get all
+        get one by id
+        update packlist
+        delete packlist
 
     */
 
@@ -39,15 +43,16 @@ public class PackListController extends BaseController {
         return packListRepository.findPackListById(packlistId);
     }
 
-    // todo: refactor to UserPacklistCtrl? Packlist can not exist without a owner..
+    // todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
     @POST
     public void addPackList(PackList packList) {
         packListRepository.addPackList(packList);
     }
 
     @PUT
+    @Path("{packlistId}")
     public void updatePackList(PackList packList) {
-        packListRepository.updatePackList(loggedInUserId(), packList);
+        packListRepository.updatePackList(packList);
     }
 
     @DELETE

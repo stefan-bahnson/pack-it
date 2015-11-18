@@ -32,8 +32,8 @@ public class PackListRepository extends Repository {
         }
     }
 
-    public void updatePackList(long userId, PackList packList) {
-        update(userId, packList);
+    public void updatePackList(PackList packList) {
+        update(packList);
     }
 
     /*

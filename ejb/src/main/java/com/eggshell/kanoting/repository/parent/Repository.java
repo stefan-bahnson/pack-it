@@ -51,7 +51,7 @@ public abstract class Repository {
 
 
     // fixme: auth turned off
-    protected <T extends BaseEntity> T update(long userId, T entity) {
+    protected <T extends BaseEntity> T update(T entity) {
 //        if(!isAuthorized(entity.id, userId, entity.getClass())) {
 //            throw new UnauthorizedException();
 //        }
