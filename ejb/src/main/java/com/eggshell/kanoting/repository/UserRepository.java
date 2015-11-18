@@ -39,7 +39,7 @@ public class UserRepository extends Repository {
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException ex) {
-            throw new NoResultException("No Users found matching email " + email); // fixme: bad idea throwing nre. return?
+            throw new NoResultException("No Users found matching email " + email); // fixme: bad idea throwing nre? return?
         }
 
         return user;
@@ -60,7 +60,7 @@ public class UserRepository extends Repository {
                 .setParameter("name", "%" + name + "%")
                 .getResultList();
         if (users.isEmpty())
-            throw new NoResultException("No Users found matching name " + name); // fixme: bad idea throwing nre. return?
+            throw new NoResultException("No Users found matching name " + name); // fixme: bad idea throwing nre? return?
 
         return users;
     }
