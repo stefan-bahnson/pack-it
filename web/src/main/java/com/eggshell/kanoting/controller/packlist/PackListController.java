@@ -23,6 +23,10 @@ public class PackListController extends BaseController {
     @Inject
     UserRepository userRepository;
 
+    /*
+        create packlist
+    */
+
     @GET
     public List<PackList> getALL() {
         return packListRepository.findAll();
@@ -34,6 +38,7 @@ public class PackListController extends BaseController {
         return packListRepository.findPackListById(packlistId);
     }
 
+    // todo: refactor to UserPacklistCtrl? Packlist can not exist without a owner..
     @POST
     public void addPackList(PackList packList) {
         packListRepository.addPackList(packList);
