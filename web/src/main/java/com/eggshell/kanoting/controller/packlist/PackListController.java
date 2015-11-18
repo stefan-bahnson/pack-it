@@ -63,6 +63,8 @@ public class PackListController extends BaseController {
 
     /**
      * Removes an item from a packlist, if there are no relations to the item it also removes the item entity
+     * todo: refactor to PacklistItemsCtrl and impl locator method?
+     * §
      */
     @DELETE
     @Path("/{id}/items")
