@@ -2,18 +2,15 @@ package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.controller.parent.BaseController;
-import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.User;
-import com.eggshell.kanoting.repository.PackListRepository;
 import com.eggshell.kanoting.repository.UserRepository;
 import com.eggshell.kanoting.security.Roles;
+import org.hibernate.validator.constraints.Email;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-
 import javax.validation.Valid;
 import javax.ws.rs.*;
-
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.*;
 import java.net.URI;
@@ -21,28 +18,45 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
-
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("/users")
-public class UserController extends BaseController {
+public class UsersController extends BaseController {
 
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/users");
-
-    @Inject
-    UserRepository userRepository;
-
-    @Inject
-    PackListRepository packListRepository;
 
     @Context
     ResourceContext rc;
 
+    @Inject
+    UserRepository userRepository;
+
+    /*
+        create
+        get all
+        get one by id
+        get one by email
+        get many by name
+        update
+        delete
+
+        locator packlists
+    */
+
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        List<User> users = userRepository.findAll();
+
+        return Response.ok(users).build();
+    }
+
+
+    @GET
     @Path("/{userId}")
     @RolesAllowed({Roles.LOGGED_IN})
-    public Response getUser(@PathParam("userId") long id, @Context Request request) {
+    public Response getUserById(@PathParam("userId") long id, @Context Request request) {
         Response.ResponseBuilder builder;
-        User user = userRepository.findUserById(id, loggedInUserId());
+        User user = userRepository.findUserById(id);
 
         // Set up cache properties
         CacheControl cc = new CacheControl();
@@ -61,9 +75,17 @@ public class UserController extends BaseController {
         return builder.build();
     }
 
+    @GET
+    @Path("by_email/{email}")
+    public Response getUserByEmail(
+            @Email @PathParam("email") String email) {
+        User userByEmail = userRepository.findUserByEmail(email);
+
+        return Response.ok(userByEmail).build();
+    }
+
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public Response create(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         user.password = PasswordHashes.createHash(user.password);
 
@@ -77,37 +99,30 @@ public class UserController extends BaseController {
         return Response.created(uri).link(resourceUri, "self").build();
     }
 
+    @PUT
+    @Path("{userId}")
+    public Response update(@PathParam("userId") long userId, User user) {
+        userRepository.updateUser(userId, user);
+
+        return Response.noContent().build();
+    }
+
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"logged_in"})
-    public Response deleteUser(User user) {
-        userRepository.deleteUser(loggedInUserId(), user);
+    @Path("{userId}")
+    public Response deleteUser(@PathParam("userId") long userId) {
+        userRepository.deleteUser(userId);
         return Response.ok().build();
     }
 
 
     /*
-     * Is not secure atm
-     */
+        Query param method by name
+    */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{userId}/packlists")
-    public Response getPacklistsOfUser(@PathParam("userId") long userId) {
-        List<PackList> packLists = packListRepository.findPackListsByUser(userId);
-        return Response.ok().entity(packLists).build();
+    @Path("search")
+    public Response searchByUserName(@QueryParam("name") String name) {
+        List<User> usersByName = userRepository.findUserByName(name);
+
+        return Response.ok(usersByName).build();
     }
-
-
-    /* -------------*/
-    /*              */
-    /*  Not needed  */
-    /*              */
-    /* -------------*/
-
-//    @PUT
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public void updateUser(User user) {
-//        userRepository.updateUser(user);
-//    }
-
 }

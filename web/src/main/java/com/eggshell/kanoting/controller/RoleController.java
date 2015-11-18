@@ -20,7 +20,6 @@ public class RoleController {
     @Inject
     RoleRepository roleRepository;
 
-    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/addUser")
     public Response addRoleToUser(User user) {
