@@ -16,7 +16,12 @@ public class PackListRepository extends Repository {
 
 
     public PackList findPackListById(long packlistId) {
-        return find(packlistId, PackList.class);
+        PackList packlist = find(packlistId, PackList.class);
+        if (packlist == null)
+            // fixme: can not find connection to mapper
+            throw new EntityNotFoundException("No packlist with id " + packlistId + " could be found");
+
+        return packlist;
     }
 
     public void addPackList(PackList packList) {
