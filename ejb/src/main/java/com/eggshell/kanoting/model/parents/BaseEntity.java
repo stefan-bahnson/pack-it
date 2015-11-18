@@ -16,4 +16,12 @@ public abstract class BaseEntity implements Serializable {
     @XmlTransient
     @ManyToMany
     public List<User> authorizedUsers;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

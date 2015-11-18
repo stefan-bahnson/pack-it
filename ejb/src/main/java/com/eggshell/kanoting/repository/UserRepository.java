@@ -65,12 +65,12 @@ public class UserRepository extends Repository {
         return users;
     }
 
-    // fixme: creates new user every time. filter?
     public void updateUser(long userId, User user) {
-        User userRef = getEm().getReference(User.class, user.id);
+        User userRef = getEm().getReference(User.class, userId);
+        user.setId(userId);
 
         if (userRef != null)
-            update(userId, user);
+            update(userId, user); // userId provided to not break func for other repos but not used.
     }
 
     public User addUser(User user) {
