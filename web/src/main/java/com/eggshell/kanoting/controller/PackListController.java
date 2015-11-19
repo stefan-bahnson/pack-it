@@ -1,6 +1,7 @@
 package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.controller.parent.BaseController;
+import com.eggshell.kanoting.controller.subresources.PacklistUsersController;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.repository.PackListRepository;
@@ -10,6 +11,8 @@ import com.eggshell.kanoting.security.Roles;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.container.ResourceContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -22,6 +25,8 @@ public class PackListController extends BaseController {
     PackListRepository packListRepository;
     @Inject
     UserRepository userRepository;
+    @Context
+    ResourceContext rc;
 
     /*
         create packlist
@@ -71,4 +76,14 @@ public class PackListController extends BaseController {
     public void deleteItemFromPackList(@PathParam("id") long id, List<Item> items) {
         packListRepository.deleteItemsFromPackList(id, items);
     }
+
+    /*
+        locator methods
+    */
+
+    @Path("{packlistId}/users")
+    public PacklistUsersController locatePacklistUsersController(){
+        return rc.getResource(PacklistUsersController.class);
+    }
+
 }
