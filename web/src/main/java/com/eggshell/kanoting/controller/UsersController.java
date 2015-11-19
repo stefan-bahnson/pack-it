@@ -86,7 +86,6 @@ public class UsersController extends BaseController {
 
     @POST
     public Response create(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
-
         user.password = PasswordHashes.createHash(user.password);
 
         User persistedUser = userRepository.addUser(user);
@@ -97,6 +96,15 @@ public class UsersController extends BaseController {
                 build();
 
         return Response.created(uri).link(resourceUri, "self").build();
+    }
+
+    @POST
+    public void createbyForm(
+            @FormParam("name") String name,
+            @FormParam("email") String email,
+            @FormParam("password") String password) {
+        userRepository.addUser(new User(name, email, password));
+
     }
 
     @PUT
