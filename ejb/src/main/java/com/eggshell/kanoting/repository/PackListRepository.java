@@ -71,4 +71,14 @@ public class PackListRepository extends Repository {
 
         return foundPls;
     }
+
+    public void addUserToPacklist(long userId, long packlistId) {
+        PackList packList = (PackList) getEm().createQuery("select p from PackList p where p.id = :packlistId")
+                .setParameter("packlistId", packlistId )
+                .getSingleResult();
+        User user = getEm().find(User.class, userId);
+
+        packList.authorizedUsers.add(user);
+        getEm().merge(packList);
+    }
 }

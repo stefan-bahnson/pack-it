@@ -14,6 +14,8 @@ import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolationException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @Stateless
@@ -96,7 +98,7 @@ public class UserRepository extends Repository {
         User user = getEm().find(User.class, userId);
 
         // update only attributes where new value is present
-        // todo: verbose.. optimize!
+        // fixme: verbose.. optimize?
         if (newName != null) {
             user.name = newName;
         }
