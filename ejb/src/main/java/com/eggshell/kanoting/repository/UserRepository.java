@@ -91,4 +91,22 @@ public class UserRepository extends Repository {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateUserByForm(long userId, String newName, String newEmail, String newPassword) {
+        User user = getEm().find(User.class, userId);
+
+        // update only attributes where new value is present
+        // todo: verbose.. optimize!
+        if (newName != null) {
+            user.name = newName;
+        }
+        if (newEmail != null) {
+            user.email = newEmail;
+        }
+        if (newPassword !=null) {
+            user.password = newPassword;
+        }
+
+        getEm().merge(user);
+    }
 }

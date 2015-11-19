@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.*;
@@ -98,13 +99,24 @@ public class UsersController extends BaseController {
         return Response.created(uri).link(resourceUri, "self").build();
     }
 
+    /*
+        Create by form params. Checks for correct fields and not null
+        for correct mapping to User obj.
+    */
     @POST
-    public void createbyForm(
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response createbyForm(
+            @NotNull(message = "Name must be provided")
             @FormParam("name") String name,
+            @NotNull(message = "Email must be provided")
+            @Email(message = "Not a valid email! Format expected: example@mail.com") // should the API care about email format?
             @FormParam("email") String email,
-            @FormParam("password") String password) {
+            @NotNull(message = "Password must be provided")
+            @FormParam("password") String password)
+    {
         userRepository.addUser(new User(name, email, password));
 
+        return Response.status(Response.Status.CREATED).build();
     }
 
     @PUT
@@ -113,6 +125,18 @@ public class UsersController extends BaseController {
         userRepository.updateUser(userId, user);
 
         return Response.noContent().build();
+    }
+
+    @PUT
+    @Path("{userId}")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void updateByForm(
+            @PathParam("userId") long userId,
+            @FormParam("name") String name,
+            @FormParam("email") String email,
+            @FormParam("password") String password)
+    {
+        userRepository.updateUserByForm(userId, name, email, password);
     }
 
     @DELETE
