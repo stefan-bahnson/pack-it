@@ -1,11 +1,13 @@
 package com.eggshell.kanoting.controller.subresources;
 
+import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.PackListRepository;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Write Javadoc...
@@ -16,6 +18,13 @@ public class PacklistUsersController {
 
     @Inject
     PackListRepository packListRepo;
+
+    @PUT
+    public Response addUsersToPacklist(@PathParam("packlistId") long packlistId, List<User> users) {
+        packListRepo.addUsersToPacklist(users, packlistId);
+
+        return Response.ok().build();
+    }
 
     @PUT
     @Path("{userId}")

@@ -79,4 +79,10 @@ public class PackListRepository extends Repository {
         packList.authorizedUsers.add(user);
         getEm().merge(packList);
     }
+
+    public void addUsersToPacklist(List<User> users, long packlistId) {
+        PackList packlist = getEm().find(PackList.class, packlistId);
+        users.forEach(packlist.authorizedUsers::add);
+        getEm().merge(packlist);
+    }
 }
