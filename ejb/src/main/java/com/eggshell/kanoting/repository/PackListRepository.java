@@ -4,10 +4,10 @@ import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,11 +73,19 @@ public class PackListRepository extends Repository {
     }
 
     public void addUserToPacklist(long userId, long packlistId) {
-        PackList packList = getEm().find(PackList.class, packlistId);
+        PackList packlist = getEm().find(PackList.class, packlistId);
         User user = getEm().find(User.class, userId);
+        if (packlist == null || user == null)
+            throw new EntityNotFoundException("Failed to add user to packlist! Either user or packlist does not exist.");
+        else {
+            packlist.authorizedUsers.add(user);
+        }
 
-        packList.authorizedUsers.add(user);
-        getEm().merge(packList);
+        try {
+            getEm().merge(packlist);
+        } catch (PersistenceException ex) {
+            System.out.println(ex.getMessage());;
+        }
     }
 
     public void addUsersToPacklist(List<User> users, long packlistId) {

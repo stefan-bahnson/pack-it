@@ -6,8 +6,10 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @NamedQueries({
@@ -34,6 +36,17 @@ public class User extends BaseEntity implements Principal {
 
     @NotNull
     public String password;
+
+    @XmlTransient
+    @ManyToMany
+    // since we only want user to occur once as a member of a packlist this is needed to apply a composite unique constraint.
+    @JoinTable(
+            name = "user_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authorizedUsers_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "authorizedUsers_id" })
+    )
+    public List<User> authorizedUsers;
 
     public User() {}
 

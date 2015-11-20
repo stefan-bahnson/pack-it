@@ -14,17 +14,6 @@ public abstract class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
-    @XmlTransient
-    // since we only want user to occur once as a member of a packlist this is needed to apply a composite unique constraint.
-    @JoinTable(
-            name = "packlist_users",
-            joinColumns = @JoinColumn(name = "packlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"packlist_id", "user_id" })
-    )
-    @ManyToMany
-    public List<User> authorizedUsers;
-
     public long getId() {
         return id;
     }
