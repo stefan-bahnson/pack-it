@@ -23,17 +23,6 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)
     public ItemCategory itemCategory;
 
-    @XmlTransient
-    @ManyToMany
-    // since we only want user to occur once as a member of a packlist this is needed to apply a composite unique constraint.
-    @JoinTable(
-            name = "item_users",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "authorizedUsers_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"item_id", "authorizedUsers_id" })
-    )
-    public List<User> authorizedUsers;
-
     @PrePersist
     private void onCreated() {
         created = new Date();

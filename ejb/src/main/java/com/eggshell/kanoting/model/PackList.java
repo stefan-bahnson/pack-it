@@ -18,14 +18,4 @@ import java.util.List;
 @Table(name = "packlist")
 public class PackList extends ListEntity {
 
-    @XmlTransient
-    @ManyToMany
-    // since we only want user to occur once as a member of a packlist this is needed to apply a composite unique constraint.
-    @JoinTable(
-            name = "packlist_users",
-            joinColumns = @JoinColumn(name = "packlist_id"),
-            inverseJoinColumns = @JoinColumn(name = "authorizedUsers_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"packlist_id", "authorizedUsers_id" })
-    )
-    public List<User> authorizedUsers;
 }
