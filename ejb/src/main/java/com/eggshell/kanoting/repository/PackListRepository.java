@@ -8,6 +8,7 @@ import com.eggshell.kanoting.repository.parent.Repository;
 import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -91,7 +92,13 @@ public class PackListRepository extends Repository {
 
     public void addUsersToPacklist(List<User> users, long packlistId) {
         PackList packlist = getEm().find(PackList.class, packlistId);
-        users.forEach(packlist.authorizedUsers::add);
+
+        // something broke. getReference solved it
+        for (User u : users) {
+            User userRef = getEm().getReference(User.class, u.id);
+            packlist.authorizedUsers.add(userRef);
+        }
+
         getEm().merge(packlist);
     }
 
