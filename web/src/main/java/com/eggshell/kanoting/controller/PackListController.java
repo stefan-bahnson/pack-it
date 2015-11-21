@@ -82,7 +82,12 @@ public class PackListController extends BaseController {
     */
 
     @Path("{packlistId}/users")
-    public PacklistUsersController locatePacklistUsersController(){
+    public PacklistUsersController locatePacklistUsers(){
+        return rc.getResource(PacklistUsersController.class);
+    }
+
+    @Path("users")
+    public PacklistUsersController locatePacklistsUser(){
         return rc.getResource(PacklistUsersController.class);
     }
 

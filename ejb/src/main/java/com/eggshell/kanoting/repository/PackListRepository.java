@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 @Stateless
@@ -92,5 +93,14 @@ public class PackListRepository extends Repository {
         PackList packlist = getEm().find(PackList.class, packlistId);
         users.forEach(packlist.authorizedUsers::add);
         getEm().merge(packlist);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<PackList> findPacklistsByAuthUserId(long authUserId) {
+        List<PackList> packlists = getEm().createQuery("select p from PackList p join p.authorizedUsers pu where pu.id = :id")
+                .setParameter("id", authUserId)
+                .getResultList();
+
+        return packlists;
     }
 }
