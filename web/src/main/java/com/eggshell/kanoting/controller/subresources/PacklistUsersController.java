@@ -23,7 +23,7 @@ public class PacklistUsersController {
     /*
         add one user to packlist with path params
         add one user to packlist with form params
-        todo: get all packlists where user is authorized
+        get all packlists where user is authorized
         todo: get all authorized users for one packlist
         todo: remove one authorized user from packlist
         todo: remove all authorized users from packlist
