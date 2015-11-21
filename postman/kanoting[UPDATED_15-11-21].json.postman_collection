@@ -149,7 +149,7 @@
 		{
 			"id": "23e23c48-a0cf-c387-1a3f-b6dd082e4a13",
 			"headers": "Accept: application/json\nAuthorization: Basic ZW1haWxAbWFpbC5jb206cHc=\n",
-			"url": "http://{{wildflyhost}}/{{kanoting}}/users/{{userId}}",
+			"url": "http://{{wildflyhost}}/{{kanoting}}/users",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
