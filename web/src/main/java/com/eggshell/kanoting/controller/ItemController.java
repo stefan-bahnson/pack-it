@@ -75,6 +75,7 @@ public class ItemController extends BaseController{
         return response;
     }
 
+    // fixme: creates new Item when updating
     @PUT
     @Path("{itemId}")
     public Response update(@PathParam("itemId") long itemId, Item item) {
