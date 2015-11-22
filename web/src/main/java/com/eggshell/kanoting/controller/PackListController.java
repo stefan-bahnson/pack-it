@@ -6,6 +6,7 @@ import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.repository.PackListRepository;
 import com.eggshell.kanoting.repository.UserRepository;
+import com.eggshell.kanoting.repository.parent.BaseRepository;
 import com.eggshell.kanoting.security.Roles;
 
 import javax.annotation.security.RolesAllowed;
@@ -23,6 +24,8 @@ public class PackListController extends BaseController {
 
     @Inject
     PackListRepository packListRepository;
+    @Inject
+    BaseRepository repo;
     @Inject
     UserRepository userRepository;
     @Context
@@ -51,7 +54,7 @@ public class PackListController extends BaseController {
     // todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
     @POST
     public void addPackList(PackList packList) {
-        packListRepository.addPackList(packList);
+        repo.add(packList);
     }
 
     @PUT

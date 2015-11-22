@@ -24,7 +24,7 @@ public abstract class Repository {
 
     private Logger logger;
 
-    protected <T extends BaseEntity> T add(T entity) {
+    public <T extends BaseEntity> T add(T entity) {
         em.persist(entity);
         em.flush();
         em.refresh(entity);
@@ -41,6 +41,17 @@ public abstract class Repository {
 
     }
 
+    /**
+     * Finds all entities for class passed
+     *
+     * @param entity Entity of given type passed
+     * @return Entity objects retrieved from the database
+     */
+    @SuppressWarnings("unchecked")
+    public List findAll(Class<?> entity) {
+        return getEm().createQuery("SELECT e FROM " + entity.getName() + " e").getResultList();
+    }
+
     // fixme: auth turned off
     public <T extends BaseEntity> T find(long id, Class<T> type) {
 //        if(!isAuthorized(id, userId, type)) {
@@ -51,7 +62,7 @@ public abstract class Repository {
 
 
     // fixme: auth turned off
-    protected <T extends BaseEntity> T update(T entity) {
+    public <T extends BaseEntity> T update(T entity) {
 //        if(!isAuthorized(entity.id, userId, entity.getClass())) {
 //            throw new UnauthorizedException();
 //        }
@@ -59,7 +70,7 @@ public abstract class Repository {
     }
 
     // fixme: auth turned off
-    protected <T extends BaseEntity> void delete(long id, Class<T> type) {
+    public <T extends BaseEntity> void delete(long id, Class<T> type ) {
 //        if(!isAuthorized(id, userId, type)) {
 //            throw new UnauthorizedException();
 //        }

@@ -24,16 +24,6 @@ public class UserRepository extends Repository {
     @Resource
     SessionContext ctx;
 
-    @SuppressWarnings("unchecked")
-    public List<User> findAll() {
-        List<User> users = getEm().createQuery("select u from User u").getResultList();
-        return users;
-    }
-
-    public User findUserById(long userId) {
-        return find(userId, User.class);
-    }
-
     public User findUserByEmail(String email) {
         User user = null;
         try {
@@ -67,33 +57,9 @@ public class UserRepository extends Repository {
         return users;
     }
 
-    public void updateUser(long userId, User user) {
-        User userRef = getEm().getReference(User.class, userId);
-        user.setId(userId);
-
-        if (userRef != null)
-            update(user);
-    }
-
-    public User addUser(User user) {
-        return add(user);
-    }
-
     /*
-        All we need is the id. Is there a good reason for sending an object?
+        Only updates attributes that has a value. Pretty awesome!
     */
-    public void deleteUser(long userId) {
-        delete(userId, User.class);
-    }
-
-    public boolean authenticate(User user, String password) {
-        try {
-            return PasswordHashes.validatePassword(password, user.password);
-        } catch(NoSuchAlgorithmException | InvalidKeySpecException  e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void updateUserByForm(long userId, String newName, String newEmail, String newPassword) {
         User user = getEm().find(User.class, userId);
 
@@ -110,5 +76,13 @@ public class UserRepository extends Repository {
         }
 
         getEm().merge(user);
+    }
+
+    public boolean authenticate(User user, String password) {
+        try {
+            return PasswordHashes.validatePassword(password, user.password);
+        } catch(NoSuchAlgorithmException | InvalidKeySpecException  e) {
+            throw new RuntimeException(e);
+        }
     }
 }
