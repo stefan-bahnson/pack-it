@@ -3,6 +3,7 @@ package com.eggshell.kanoting.controller;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.repository.ItemRepository;
+import com.eggshell.kanoting.repository.parent.BaseRepo;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -22,6 +23,8 @@ public class ItemController extends BaseController{
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/items");
 
     @Inject
+    BaseRepo repo;
+    @Inject
     ItemRepository itemRepository;
 
     /*
@@ -36,7 +39,7 @@ public class ItemController extends BaseController{
     @POST
     public Response addItem(@Valid Item item, @Context UriInfo info) {
 
-        Item persistedItem =  itemRepository.addItem(item);
+        Item persistedItem =  repo.save(item);
         long id = persistedItem.id;
 
         URI uri = info.getAbsolutePathBuilder().
@@ -48,8 +51,9 @@ public class ItemController extends BaseController{
 
 
     @GET
+    @SuppressWarnings("unchecked")
     public Response getAll() {
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = repo.findAll(Item.class);
 
         return Response.ok(items).build();
     }
@@ -57,7 +61,7 @@ public class ItemController extends BaseController{
     @GET
     @Path("/{itemId}")
     public Response getItem(@PathParam("itemId") long id) {
-        Item item = itemRepository.findItemById(id);
+        Item item = repo.find(Item.class, id);
 
         Response response;
 
@@ -74,7 +78,7 @@ public class ItemController extends BaseController{
     @PUT
     @Path("{itemId}")
     public Response update(@PathParam("itemId") long itemId, Item item) {
-        itemRepository.updateItem(itemId, item);
+        repo.update(item);
 
         return Response.noContent().build();
     }
@@ -84,8 +88,9 @@ public class ItemController extends BaseController{
      * When executed, it shall remove an item entity and all relations to it
      */
     @DELETE
-    public Response deleteItem(Item item) {
-        itemRepository.deleteItem(item);
+    @Path("{itemId}")
+    public Response deleteItem(@PathParam("itemId") long itemId) {
+        repo.delete(Item.class, itemId);
         return Response.ok().build();
     }
 }
