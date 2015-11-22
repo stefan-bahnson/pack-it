@@ -1,6 +1,6 @@
 package com.eggshell.kanoting.controller.subresources;
 
-import com.eggshell.kanoting.model.PackList;
+import com.eggshell.kanoting.model.PacklList;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.PackListRepository;
 
@@ -8,9 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Write Javadoc...
@@ -23,8 +21,8 @@ public class PacklistUsersController {
     PackListRepository packListRepo;
 
     /*
-        add one user to packlist with path params
-        add one user to packlist with form params
+        save one user to packlist with path params
+        save one user to packlist with form params
         get all packlists where user is authorized
         todo: get all authorized users for one packlist
         todo: remove one authorized user from packlist
@@ -49,7 +47,7 @@ public class PacklistUsersController {
 
     @GET
     @Path("{authUserId}")
-    public List<PackList> getPacklistsByAuthUserId(@PathParam("authUserId") long authUserId) {
+    public List<PacklList> getPacklistsByAuthUserId(@PathParam("authUserId") long authUserId) {
         return packListRepo.findPacklistsByAuthUserId(authUserId);
     }
 

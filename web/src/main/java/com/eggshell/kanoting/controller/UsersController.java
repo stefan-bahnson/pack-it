@@ -1,11 +1,9 @@
 package com.eggshell.kanoting.controller;
 
-import com.eggshell.kanoting.authentication.PasswordHashes;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
-import com.eggshell.kanoting.repository.parent.BaseRepository;
-import com.eggshell.kanoting.repository.parent.Repository;
+import com.eggshell.kanoting.repository.parent.BaseRepo;
 import com.eggshell.kanoting.security.Roles;
 import org.hibernate.validator.constraints.Email;
 
@@ -31,15 +29,8 @@ public class UsersController extends BaseController {
     @Context
     ResourceContext rc;
 
-    /*
-        This is what we want to do but we can't right now because all repos extend repository.
-        Remove BaseRepository when they don't anymore and functionality should be intact.
-    */
-//    @Inject
-//    Repository repo;
     @Inject
-    BaseRepository repo;
-
+    BaseRepo repo;
     @Inject
     UserRepository userRepository;
     /*
@@ -62,15 +53,17 @@ public class UsersController extends BaseController {
 //        no Hashing to make update work for the moment.
 //        user.password = PasswordHashes.createHash(user.password);
 
-        repo.add(user);
+        repo.save(user);
 
         return Response.status(Response.Status.CREATED).build();
     }
 
     /*
-    Create by form params. Checks for correct fields and not null
-    for correct mapping to User obj.
-*/
+        base repo
+
+        Create by form params. Checks for correct fields and not null
+        for correct mapping to User obj.
+    */
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response createbyForm(
@@ -82,7 +75,7 @@ public class UsersController extends BaseController {
             @NotNull(message = "Password must be provided")
             @FormParam("password") String password)
     {
-        userRepository.add(new User(name, email, password));
+        repo.save(new User(name, email, password));
 
         return Response.status(Response.Status.CREATED).build();
     }
@@ -91,11 +84,9 @@ public class UsersController extends BaseController {
         base repo
     */
     @GET
+    @SuppressWarnings("unchecked")
     public Response getAll() {
-
-        @SuppressWarnings("unchecked") // can be done on class level
         List<User> users = repo.findAll(User.class);
-
         return Response.ok(users).build();
     }
 
@@ -107,7 +98,7 @@ public class UsersController extends BaseController {
     @RolesAllowed({Roles.LOGGED_IN})
     public Response getUserById(@PathParam("userId") long id, @Context Request request) {
         Response.ResponseBuilder builder;
-        User user = repo.find(id, User.class);
+        User user = repo.find(User.class, id);
 
         // Set up cache properties
         CacheControl cc = new CacheControl();
@@ -165,7 +156,7 @@ public class UsersController extends BaseController {
     @DELETE
     @Path("{userId}")
     public Response deleteUser(@PathParam("userId") long userId) {
-        repo.delete(userId, User.class);
+        repo.delete(User.class ,userId);
         return Response.ok().build();
     }
 

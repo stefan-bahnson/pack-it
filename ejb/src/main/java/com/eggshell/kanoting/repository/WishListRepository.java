@@ -1,6 +1,5 @@
 package com.eggshell.kanoting.repository;
 
-import com.eggshell.kanoting.model.PackList;
 import com.eggshell.kanoting.model.WishList;
 import com.eggshell.kanoting.repository.parent.Repository;
 

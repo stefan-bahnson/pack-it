@@ -3,9 +3,7 @@ package com.eggshell.kanoting.controller;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.WishList;
 import com.eggshell.kanoting.repository.WishListRepository;
-import com.eggshell.kanoting.security.Roles;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -3,13 +3,10 @@ package com.eggshell.kanoting.controller;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.controller.subresources.PacklistUsersController;
 import com.eggshell.kanoting.model.Item;
-import com.eggshell.kanoting.model.PackList;
+import com.eggshell.kanoting.model.PacklList;
 import com.eggshell.kanoting.repository.PackListRepository;
-import com.eggshell.kanoting.repository.UserRepository;
-import com.eggshell.kanoting.repository.parent.BaseRepository;
-import com.eggshell.kanoting.security.Roles;
+import com.eggshell.kanoting.repository.parent.BaseRepo;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
@@ -23,11 +20,10 @@ import java.util.List;
 public class PackListController extends BaseController {
 
     @Inject
+    BaseRepo repo;
+    @Inject
     PackListRepository packListRepository;
-    @Inject
-    BaseRepository repo;
-    @Inject
-    UserRepository userRepository;
+
     @Context
     ResourceContext rc;
 
@@ -40,39 +36,55 @@ public class PackListController extends BaseController {
 
     */
 
-    @GET
-    public List<PackList> getALL() {
-        return packListRepository.findAll();
+    /*
+        base repo
+
+        todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
+    */
+    @POST
+    public void addPackList(PacklList packlList) {
+        repo.save(packlList);
     }
 
+    /*
+        base repo
+    */
+    @GET
+    @SuppressWarnings("unchecked")
+    public List<PacklList> getALL() {
+        return repo.findAll(PacklList.class);
+    }
+
+    /*
+        base repo
+    */
     @GET
     @Path("/{packListId}")
-    public PackList getPackList(@PathParam("packListId") long packlistId) {
-        return packListRepository.findPackListById(packlistId);
+    public PacklList getPackList(@PathParam("packListId") long packlistId) {
+        return repo.find(PacklList.class, packlistId);
     }
 
-    // todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
-    @POST
-    public void addPackList(PackList packList) {
-        repo.add(packList);
-    }
-
+    /*
+        base repo
+    */
     @PUT
     @Path("{packlistId}")
-    public void updatePackList(PackList packList) {
-        packListRepository.updatePackList(packList);
+    public void updatePackList(PacklList packlList) {
+        repo.update(packlList);
     }
 
+    /*
+        base repo
+    */
     @DELETE
     @Path("{packlistId}")
     public void delete(@PathParam("packlistId") long packlistId) {
-        packListRepository.deletePacklist(packlistId);
+        repo.delete(PacklList.class, packlistId);
     }
 
     /**
      * Removes an item from a packlist, if there are no relations to the item it also removes the item entity
      * todo: refactor to PacklistItemsCtrl and impl locator method?
-     * §
      */
     @DELETE
     @Path("/{id}/items")
@@ -81,14 +93,16 @@ public class PackListController extends BaseController {
     }
 
     /*
-        locator methods
+        locator method
     */
-
     @Path("{packlistId}/users")
     public PacklistUsersController locatePacklistUsers(){
         return rc.getResource(PacklistUsersController.class);
     }
 
+    /*
+        locator method
+    */
     @Path("users")
     public PacklistUsersController locatePacklistsUser(){
         return rc.getResource(PacklistUsersController.class);

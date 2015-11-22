@@ -27,11 +27,11 @@ public class JaxRsActivator extends Application {
         resources.add(ItemController.class);
         resources.add(PackListController.class);
         resources.add(WishListController.class);
-//        resources.add(LoginController.class);
+//        resources.save(LoginController.class);
 
         // For activation of javax.security.annotations
-//        resources.add(RolesAllowedDynamicFeature.class);
-//        resources.add(Authenticate.class);
+//        resources.save(RolesAllowedDynamicFeature.class);
+//        resources.save(Authenticate.class);
         resources.add(EJBExceptionMapper.class);
         resources.add(WebApplicationExceptionMapper.class);
 

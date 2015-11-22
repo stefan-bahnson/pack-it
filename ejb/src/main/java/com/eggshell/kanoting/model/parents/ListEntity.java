@@ -33,7 +33,7 @@ public abstract class ListEntity extends BaseEntity {
     protected void onCreated() {
         created = new Date();
 //        authorizedUsers = new ArrayList<>();
-//        authorizedUsers.add(user);
+//        authorizedUsers.save(user);
     }
 
     @PreUpdate
