@@ -8,14 +8,14 @@ import java.util.List;
 
 @NamedQueries({
     @NamedQuery(name = "PackList.findALL",
-            query = "SELECT pl FROM PacklList pl"),
+            query = "SELECT pl FROM Packlist pl"),
     @NamedQuery(name = "PackList.findPackListByUserId",
-            query = "SELECT pl FROM PacklList pl WHERE pl.user.id = :userId"),
+            query = "SELECT pl FROM Packlist pl WHERE pl.user.id = :userId"),
     @NamedQuery(name="PackList.findByUsers",
-            query="Select p FROM PacklList p WHERE p.user.id = :userId")
+            query="Select p FROM Packlist p WHERE p.user.id = :userId")
 })
 @Entity
 @Table(name = "packlist")
-public class PacklList extends ListEntity {
+public class Packlist extends ListEntity {
 
 }

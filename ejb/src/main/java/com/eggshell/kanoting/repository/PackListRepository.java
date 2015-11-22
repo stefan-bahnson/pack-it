@@ -1,7 +1,7 @@
 package com.eggshell.kanoting.repository;
 
 import com.eggshell.kanoting.model.Item;
-import com.eggshell.kanoting.model.PacklList;
+import com.eggshell.kanoting.model.Packlist;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 
@@ -18,7 +18,7 @@ public class PackListRepository extends Repository {
 
     public void deleteItemsFromPackList(long id, List<Item> items) {
 
-        PacklList attachedPacklList = getEm().find(PacklList.class, id);
+        Packlist attachedPacklList = getEm().find(Packlist.class, id);
 
         Stream<Item> filteredItems = items.stream()
                 .filter(attachedPacklList.items::contains);
@@ -27,8 +27,8 @@ public class PackListRepository extends Repository {
                 .collect(Collectors.toSet());
     }
 
-    public List<PacklList> findPackListsByUserId(long userId) {
-        List<PacklList> foundPls = getEm().createNamedQuery("PackList.findPackListByUserId", PacklList.class)
+    public List<Packlist> findPackListsByUserId(long userId) {
+        List<Packlist> foundPls = getEm().createNamedQuery("PackList.findPackListByUserId", Packlist.class)
                 .setParameter("userId", userId)
                 .getResultList();
         if (foundPls.isEmpty())
@@ -38,7 +38,7 @@ public class PackListRepository extends Repository {
     }
 
     public void addUserToPacklist(long userId, long packlistId) {
-        PacklList packlList = getEm().find(PacklList.class, packlistId);
+        Packlist packlList = getEm().find(Packlist.class, packlistId);
         User user = getEm().find(User.class, userId);
         if (packlList == null || user == null)
             throw new EntityNotFoundException("Failed to add user to packlist! Either user or packlist does not exist.");
@@ -54,7 +54,7 @@ public class PackListRepository extends Repository {
     }
 
     public void addUsersToPacklist(List<User> users, long packlistId) {
-        PacklList packlList = getEm().find(PacklList.class, packlistId);
+        Packlist packlList = getEm().find(Packlist.class, packlistId);
 
         // something broke. getReference solved it
         for (User u : users) {
@@ -66,8 +66,8 @@ public class PackListRepository extends Repository {
     }
 
     @SuppressWarnings("unchecked")
-    public List<PacklList> findPacklistsByAuthUserId(long authUserId) {
-        return getEm().createQuery("select p from PacklList p join p.authorizedUsers pu where pu.id = :id")
+    public List<Packlist> findPacklistsByAuthUserId(long authUserId) {
+        return getEm().createQuery("select p from Packlist p join p.authorizedUsers pu where pu.id = :id")
                 .setParameter("id", authUserId)
                 .getResultList();
     }

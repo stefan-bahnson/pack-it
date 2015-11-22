@@ -3,7 +3,7 @@ package com.eggshell.kanoting.controller;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.controller.subresources.PacklistUsersController;
 import com.eggshell.kanoting.model.Item;
-import com.eggshell.kanoting.model.PacklList;
+import com.eggshell.kanoting.model.Packlist;
 import com.eggshell.kanoting.repository.PackListRepository;
 import com.eggshell.kanoting.repository.parent.BaseRepo;
 
@@ -42,7 +42,7 @@ public class PackListController extends BaseController {
         todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
     */
     @POST
-    public void addPackList(PacklList packlList) {
+    public void addPackList(Packlist packlList) {
         repo.save(packlList);
     }
 
@@ -51,8 +51,8 @@ public class PackListController extends BaseController {
     */
     @GET
     @SuppressWarnings("unchecked")
-    public List<PacklList> getALL() {
-        return repo.findAll(PacklList.class);
+    public List<Packlist> getALL() {
+        return repo.findAll(Packlist.class);
     }
 
     /*
@@ -60,8 +60,8 @@ public class PackListController extends BaseController {
     */
     @GET
     @Path("/{packListId}")
-    public PacklList getPackList(@PathParam("packListId") long packlistId) {
-        return repo.find(PacklList.class, packlistId);
+    public Packlist getPackList(@PathParam("packListId") long packlistId) {
+        return repo.find(Packlist.class, packlistId);
     }
 
     /*
@@ -69,7 +69,7 @@ public class PackListController extends BaseController {
     */
     @PUT
     @Path("{packlistId}")
-    public void updatePackList(PacklList packlList) {
+    public void updatePackList(Packlist packlList) {
         repo.update(packlList);
     }
 
@@ -79,7 +79,7 @@ public class PackListController extends BaseController {
     @DELETE
     @Path("{packlistId}")
     public void delete(@PathParam("packlistId") long packlistId) {
-        repo.delete(PacklList.class, packlistId);
+        repo.delete(Packlist.class, packlistId);
     }
 
     /**

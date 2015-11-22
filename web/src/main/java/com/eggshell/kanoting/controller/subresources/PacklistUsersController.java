@@ -1,6 +1,6 @@
 package com.eggshell.kanoting.controller.subresources;
 
-import com.eggshell.kanoting.model.PacklList;
+import com.eggshell.kanoting.model.Packlist;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.PackListRepository;
 
@@ -47,7 +47,7 @@ public class PacklistUsersController {
 
     @GET
     @Path("{authUserId}")
-    public List<PacklList> getPacklistsByAuthUserId(@PathParam("authUserId") long authUserId) {
+    public List<Packlist> getPacklistsByAuthUserId(@PathParam("authUserId") long authUserId) {
         return packListRepo.findPacklistsByAuthUserId(authUserId);
     }
 
