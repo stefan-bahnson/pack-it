@@ -5,7 +5,6 @@ import com.eggshell.kanoting.controller.subresources.PacklistUsersController;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.model.Packlist;
 import com.eggshell.kanoting.repository.PackListRepository;
-import com.eggshell.kanoting.repository.parent.BaseRepo;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -26,20 +25,11 @@ public class PackListController extends BaseController {
     ResourceContext rc;
 
     /*
-        create packlist
         get all
         get one by id
         update packlist
         delete packlist
     */
-
-    /*
-        todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
-    */
-    @POST
-    public void addPackList(Packlist packlList) {
-        packListRepository.add(packlList);
-    }
 
     @GET
     @SuppressWarnings("unchecked")

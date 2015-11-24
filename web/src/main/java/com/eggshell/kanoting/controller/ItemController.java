@@ -3,7 +3,6 @@ package com.eggshell.kanoting.controller;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.repository.ItemRepository;
-import com.eggshell.kanoting.repository.parent.BaseRepo;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

@@ -3,7 +3,6 @@ package com.eggshell.kanoting.controller;
 import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
-import com.eggshell.kanoting.repository.parent.BaseRepo;
 import com.eggshell.kanoting.security.Roles;
 import org.hibernate.validator.constraints.Email;
 
