@@ -28,7 +28,7 @@ public class WishListController extends BaseController {
 
     @POST
     public void create(WishList wishList) {
-        wishListRepository.addWishList(wishList);
+        wishListRepository.add(wishList);
     }
 
     @GET
@@ -41,23 +41,23 @@ public class WishListController extends BaseController {
     @GET
     @Path("/{wishListId}")
     public WishList getWishList(@PathParam("wishListId") long id) {
-        return wishListRepository.findWishListById(id);
+        return wishListRepository.find(id, WishList.class);
     }
-
 
     /*
         todo: in this case we are updating a specifik entity on collection level. see PackListController for alternative.
     */
     @PUT
     public void updateWishList(WishList wishList) {
-        wishListRepository.updateWishList(wishList);
+        wishListRepository.update(wishList);
     }
 
     /*
         same note as for method above
     */
     @DELETE
-    public void deleteWishList(WishList wishList) {
-        wishListRepository.deleteWishList(wishList);
+    @Path("{wishlistId}")
+    public void deleteWishList(@PathParam("wishlistId") long wishlistId) {
+        wishListRepository.delete(wishlistId, WishList.class);
     }
 }

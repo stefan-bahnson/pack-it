@@ -20,8 +20,6 @@ import java.util.List;
 public class PackListController extends BaseController {
 
     @Inject
-    BaseRepo repo;
-    @Inject
     PackListRepository packListRepository;
 
     @Context
@@ -43,7 +41,7 @@ public class PackListController extends BaseController {
     */
     @POST
     public void addPackList(Packlist packlList) {
-        repo.save(packlList);
+        packListRepository.add(packlList);
     }
 
     /*
@@ -52,7 +50,7 @@ public class PackListController extends BaseController {
     @GET
     @SuppressWarnings("unchecked")
     public List<Packlist> getALL() {
-        return repo.findAll(Packlist.class);
+        return packListRepository.findAll(Packlist.class);
     }
 
     /*
@@ -61,7 +59,7 @@ public class PackListController extends BaseController {
     @GET
     @Path("/{packListId}")
     public Packlist getPackList(@PathParam("packListId") long packlistId) {
-        return repo.find(Packlist.class, packlistId);
+        return packListRepository.find(packlistId, Packlist.class);
     }
 
     /*
@@ -70,7 +68,7 @@ public class PackListController extends BaseController {
     @PUT
     @Path("{packlistId}")
     public void updatePackList(Packlist packlList) {
-        repo.update(packlList);
+        packListRepository.update(packlList);
     }
 
     /*
@@ -79,7 +77,7 @@ public class PackListController extends BaseController {
     @DELETE
     @Path("{packlistId}")
     public void delete(@PathParam("packlistId") long packlistId) {
-        repo.delete(Packlist.class, packlistId);
+        packListRepository.delete(packlistId, Packlist.class);
     }
 
     /**

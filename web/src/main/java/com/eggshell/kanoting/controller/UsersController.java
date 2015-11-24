@@ -30,9 +30,8 @@ public class UsersController extends BaseController {
     ResourceContext rc;
 
     @Inject
-    BaseRepo repo;
-    @Inject
     UserRepository userRepository;
+
     /*
         create
         get all
@@ -45,22 +44,17 @@ public class UsersController extends BaseController {
         locator packlists
     */
 
-    /*
-        Base repo
-    */
     @POST
     public Response create(@Valid User user, @Context UriInfo info) throws NoSuchAlgorithmException, InvalidKeySpecException {
 //        no Hashing to make update work for the moment.
 //        user.password = PasswordHashes.createHash(user.password);
 
-        repo.save(user);
+        userRepository.add(user);
 
         return Response.status(Response.Status.CREATED).build();
     }
 
     /*
-        base repo
-
         Create by form params. Checks for correct fields and not null
         for correct mapping to User obj.
     */
@@ -75,7 +69,7 @@ public class UsersController extends BaseController {
             @NotNull(message = "Password must be provided")
             @FormParam("password") String password)
     {
-        repo.save(new User(name, email, password));
+        userRepository.add(new User(name, email, password));
 
         return Response.status(Response.Status.CREATED).build();
     }
@@ -86,7 +80,7 @@ public class UsersController extends BaseController {
     @GET
     @SuppressWarnings("unchecked")
     public Response getAll() {
-        List<User> users = repo.findAll(User.class);
+        List<User> users = userRepository.findAll(User.class);
         return Response.ok(users).build();
     }
 
@@ -98,7 +92,7 @@ public class UsersController extends BaseController {
     @RolesAllowed({Roles.LOGGED_IN})
     public Response getUserById(@PathParam("userId") long id, @Context Request request) {
         Response.ResponseBuilder builder;
-        User user = repo.find(User.class, id);
+        User user = userRepository.find(id, User.class);
 
         // Set up cache properties
         CacheControl cc = new CacheControl();
@@ -125,15 +119,11 @@ public class UsersController extends BaseController {
         return Response.ok(userByEmail).build();
     }
 
-
-    /*
-        base repo
-    */
     @PUT
     @Path("{userId}")
     public Response update(@PathParam("userId") long userId, User user) {
 
-        repo.update(user);
+        userRepository.update(user);
 
         return Response.noContent().build();
     }
@@ -150,13 +140,10 @@ public class UsersController extends BaseController {
         userRepository.updateUserByForm(userId, name, email, password);
     }
 
-    /*
-        base repo
-    */
     @DELETE
     @Path("{userId}")
     public Response deleteUser(@PathParam("userId") long userId) {
-        repo.delete(User.class ,userId);
+        userRepository.delete(userId, User.class);
         return Response.ok().build();
     }
 

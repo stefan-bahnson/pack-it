@@ -4,10 +4,10 @@ import com.eggshell.kanoting.exceptions.UnauthorizedException;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.model.parents.BaseEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.persistence.*;
+import javax.ws.rs.ext.Provider;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * Created by tailage on 9/18/15.
  */
 
-
+@Provider
 public abstract class Repository {
 
     @PersistenceContext

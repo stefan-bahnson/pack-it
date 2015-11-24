@@ -8,6 +8,7 @@ import com.eggshell.kanoting.controller.UsersController;
 import com.eggshell.kanoting.controller.WishListController;
 import com.eggshell.kanoting.exception.mappers.EJBExceptionMapper;
 import com.eggshell.kanoting.exception.mappers.WebApplicationExceptionMapper;
+import com.eggshell.kanoting.repository.parent.Repository;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -21,6 +22,7 @@ public class JaxRsActivator extends Application {
         Set<Class<?>> resources = new java.util.HashSet<>();
 
         resources.add(RootController.class);
+        resources.add(Repository.class);
 
         resources.add(UsersController.class);
         resources.add(RoleController.class);

@@ -23,8 +23,6 @@ public class ItemController extends BaseController{
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/items");
 
     @Inject
-    BaseRepo repo;
-    @Inject
     ItemRepository itemRepository;
 
     /*
@@ -39,12 +37,12 @@ public class ItemController extends BaseController{
     @POST
     public Response addItem(@Valid Item item, @Context UriInfo info) {
 
-        Item persistedItem =  repo.save(item);
+        Item persistedItem =  itemRepository.add(item);
         long id = persistedItem.id;
 
-        URI uri = info.getAbsolutePathBuilder().
-                path("/" + id).
-                build();
+        URI uri = info.getAbsolutePathBuilder()
+                .path("/" + id)
+                .build();
 
         return Response.created(uri).link(resourceUri, "self").build();
     }
@@ -53,7 +51,7 @@ public class ItemController extends BaseController{
     @GET
     @SuppressWarnings("unchecked")
     public Response getAll() {
-        List<Item> items = repo.findAll(Item.class);
+        List<Item> items = itemRepository.findAll(Item.class);
 
         return Response.ok(items).build();
     }
@@ -61,7 +59,7 @@ public class ItemController extends BaseController{
     @GET
     @Path("/{itemId}")
     public Response getItem(@PathParam("itemId") long id) {
-        Item item = repo.find(Item.class, id);
+        Item item = itemRepository.find(id, Item.class);
 
         Response response;
 
@@ -79,7 +77,7 @@ public class ItemController extends BaseController{
     @PUT
     @Path("{itemId}")
     public Response update(@PathParam("itemId") long itemId, Item item) {
-        repo.update(item);
+        itemRepository.update(item);
 
         return Response.noContent().build();
     }
@@ -91,7 +89,7 @@ public class ItemController extends BaseController{
     @DELETE
     @Path("{itemId}")
     public Response deleteItem(@PathParam("itemId") long itemId) {
-        repo.delete(Item.class, itemId);
+        itemRepository.delete(itemId, Item.class);
         return Response.ok().build();
     }
 }

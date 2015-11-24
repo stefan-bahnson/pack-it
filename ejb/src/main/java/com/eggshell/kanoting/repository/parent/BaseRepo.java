@@ -26,6 +26,7 @@ public class BaseRepo {
         String className = type.getSimpleName();
         String basePart = String.format("SELECT e FROM %s e WHERE e.id = :id", className);
         String authPart = "exists(SELECT user FROM e.authorizedUsers user WHERE user.id = :userId)";
+
         TypedQuery<BaseEntity> query = em.createQuery(basePart + " AND " + authPart, BaseEntity.class);
         query = query.setParameter("id", id).setParameter("userId", userId);
         return !query.getResultList().isEmpty();
