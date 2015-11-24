@@ -44,11 +44,4 @@ public class PacklistUsersController {
 
         return Response.ok().build();
     }
-
-    @GET
-    @Path("{authUserId}")
-    public List<Packlist> getPacklistsByAuthUserId(@PathParam("authUserId") long authUserId) {
-        return packListRepo.findPacklistsByAuthUserId(authUserId);
-    }
-
 }

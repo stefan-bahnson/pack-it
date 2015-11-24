@@ -31,12 +31,9 @@ public class PackListController extends BaseController {
         get one by id
         update packlist
         delete packlist
-
     */
 
     /*
-        base repo
-
         todo: refactor to UserPacklistCtrl? Packlist can not exist without an owner..
     */
     @POST
@@ -44,36 +41,24 @@ public class PackListController extends BaseController {
         packListRepository.add(packlList);
     }
 
-    /*
-        base repo
-    */
     @GET
     @SuppressWarnings("unchecked")
     public List<Packlist> getALL() {
         return packListRepository.findAll(Packlist.class);
     }
 
-    /*
-        base repo
-    */
     @GET
     @Path("/{packListId}")
     public Packlist getPackList(@PathParam("packListId") long packlistId) {
         return packListRepository.find(packlistId, Packlist.class);
     }
 
-    /*
-        base repo
-    */
     @PUT
     @Path("{packlistId}")
     public void updatePackList(Packlist packlList) {
         packListRepository.update(packlList);
     }
 
-    /*
-        base repo
-    */
     @DELETE
     @Path("{packlistId}")
     public void delete(@PathParam("packlistId") long packlistId) {
@@ -97,13 +82,4 @@ public class PackListController extends BaseController {
     public PacklistUsersController locatePacklistUsers(){
         return rc.getResource(PacklistUsersController.class);
     }
-
-    /*
-        locator method
-    */
-    @Path("users")
-    public PacklistUsersController locatePacklistsUser(){
-        return rc.getResource(PacklistUsersController.class);
-    }
-
 }
