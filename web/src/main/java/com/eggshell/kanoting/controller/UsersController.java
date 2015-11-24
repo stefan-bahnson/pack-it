@@ -1,8 +1,8 @@
 package com.eggshell.kanoting.controller;
 
+import com.eggshell.kanoting.controller.subresources.UserPacklistController;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
-import com.eggshell.kanoting.security.Roles;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -55,7 +55,6 @@ public class UsersController {
 
     @GET
     @Path("/{userId}")
-    @RolesAllowed({Roles.LOGGED_IN})
     public Response getUserById(@PathParam("userId") long id, @Context Request request) {
         User user = userRepository.find(id, User.class);
 
@@ -77,5 +76,10 @@ public class UsersController {
         userRepository.delete(userId, User.class);
 
         return Response.ok().build();
+    }
+
+    @Path("{userId}/packlists")
+    public UserPacklistController locateUserPacklists() {
+        return rc.getResource(UserPacklistController.class);
     }
 }

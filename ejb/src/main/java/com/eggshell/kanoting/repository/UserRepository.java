@@ -2,6 +2,7 @@ package com.eggshell.kanoting.repository;
 
 
 import com.eggshell.kanoting.authentication.PasswordHashes;
+import com.eggshell.kanoting.model.Packlist;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.parent.Repository;
 
@@ -27,5 +28,11 @@ public class UserRepository extends Repository {
         } catch(NoSuchAlgorithmException | InvalidKeySpecException  e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Packlist> findPacklistsByUserId(long userId) {
+        return getEm().createQuery("SELECT p FROM Packlist p WHERE p.user.id=:id", Packlist.class)
+                .setParameter("id", userId)
+                .getResultList();
     }
 }

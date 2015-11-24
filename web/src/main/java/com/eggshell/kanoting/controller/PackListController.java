@@ -42,18 +42,6 @@ public class PackListController {
         return packListRepository.find(packlistId, Packlist.class);
     }
 
-    @PUT
-    @Path("{packlistId}")
-    public void updatePackList(Packlist packlList) {
-        packListRepository.update(packlList);
-    }
-
-    @DELETE
-    @Path("{packlistId}")
-    public void delete(@PathParam("packlistId") long packlistId) {
-        packListRepository.delete(packlistId, Packlist.class);
-    }
-
     /**
      * Removes an item from a packlist, if there are no relations to the item it also removes the item entity
      * todo: refactor to PacklistItemsCtrl and impl locator method?
