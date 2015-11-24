@@ -64,11 +64,4 @@ public class PackListRepository extends Repository {
 
         getEm().merge(packlList);
     }
-
-    @SuppressWarnings("unchecked")
-    public List<Packlist> findPacklistsByAuthUserId(long authUserId) {
-        return getEm().createQuery("select p from Packlist p join p.authorizedUsers pu where pu.id = :id")
-                .setParameter("id", authUserId)
-                .getResultList();
-    }
 }

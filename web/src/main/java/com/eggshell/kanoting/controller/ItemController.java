@@ -1,6 +1,5 @@
 package com.eggshell.kanoting.controller;
 
-import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.Item;
 import com.eggshell.kanoting.repository.ItemRepository;
 
@@ -17,7 +16,7 @@ import java.util.List;
 @Path("/items")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ItemController extends BaseController{
+public class ItemController {
 
     private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/items");
 
@@ -60,16 +59,7 @@ public class ItemController extends BaseController{
     public Response getItem(@PathParam("itemId") long id) {
         Item item = itemRepository.find(id, Item.class);
 
-        Response response;
-
-        // fixme: mapper for this?
-        if(item == null) {
-            response = Response.noContent().build();
-        } else {
-            response = Response.ok().entity(item).build();
-        }
-
-        return response;
+        return Response.ok().entity(item).build();
     }
 
     // fixme: creates new Item when updating
@@ -89,6 +79,7 @@ public class ItemController extends BaseController{
     @Path("{itemId}")
     public Response deleteItem(@PathParam("itemId") long itemId) {
         itemRepository.delete(itemId, Item.class);
+
         return Response.ok().build();
     }
 }

@@ -62,10 +62,12 @@ public abstract class Repository {
 
 
     // fixme: auth turned off
+    // use id from path param
     public <T extends BaseEntity> T update(T entity) {
 //        if(!isAuthorized(entity.id, userId, entity.getClass())) {
 //            throw new UnauthorizedException();
 //        }
+
         return em.merge(entity);
     }
 

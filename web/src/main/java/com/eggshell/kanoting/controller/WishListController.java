@@ -1,6 +1,5 @@
 package com.eggshell.kanoting.controller;
 
-import com.eggshell.kanoting.controller.parent.BaseController;
 import com.eggshell.kanoting.model.WishList;
 import com.eggshell.kanoting.repository.WishListRepository;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @Path("/wishlists")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class WishListController extends BaseController {
+public class WishListController {
 
     @Inject
     WishListRepository wishListRepository;
@@ -32,8 +31,9 @@ public class WishListController extends BaseController {
     }
 
     @GET
+    @SuppressWarnings("unchecked")
     public Response getAll() {
-        List<WishList> wishlists = wishListRepository.findAll();
+        List<WishList> wishlists = wishListRepository.findAll(WishList.class);
 
         return Response.ok(wishlists).build();
     }
@@ -48,13 +48,11 @@ public class WishListController extends BaseController {
         todo: in this case we are updating a specifik entity on collection level. see PackListController for alternative.
     */
     @PUT
-    public void updateWishList(WishList wishList) {
+    @Path("{wishlistId}")
+    public void updateWishList(@PathParam("wishlistId") long wishlistId, WishList wishList) {
         wishListRepository.update(wishList);
     }
 
-    /*
-        same note as for method above
-    */
     @DELETE
     @Path("{wishlistId}")
     public void deleteWishList(@PathParam("wishlistId") long wishlistId) {
