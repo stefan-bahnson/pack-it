@@ -4,11 +4,11 @@ import com.eggshell.kanoting.model.Packlist;
 import com.eggshell.kanoting.repository.PackListRepository;
 import com.eggshell.kanoting.repository.UserRepository;
 
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import java.util.List;
 
 /**
@@ -24,6 +24,13 @@ public class UserPacklistController {
 
     @Inject
     PackListRepository packListRepository;
+
+    @POST
+    public Response create(@PathParam("userId") long userId, Packlist packlist) {
+        packListRepository.addPacklistToUser(userId, packlist);
+
+        return Response.status(Status.CREATED).build();
+    }
 
     @GET
     public Response getAll(@PathParam("userId") long id) {

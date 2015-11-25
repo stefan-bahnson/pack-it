@@ -19,11 +19,6 @@ public class PacklistUsersController {
     @Inject
     PackListRepository packListRepo;
 
-    /*
-        save one user to packlist with path params
-        save one user to packlist with form params
-    */
-
     @PUT
     public Response addUsersToPacklist(@PathParam("packlistId") long packlistId, List<User> users) {
         packListRepo.addUsersToPacklist(users, packlistId);

@@ -64,4 +64,11 @@ public class PackListRepository extends Repository {
 
         getEm().merge(packlList);
     }
+
+    public void addPacklistToUser(long userId, Packlist packlist) {
+        User userRef = getEm().getReference(User.class, userId);
+        packlist.user = userRef;
+
+        getEm().merge(packlist);
+    }
 }
