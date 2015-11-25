@@ -15,7 +15,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/packlists")
-public class PackListController {
+public class PacklistController {
 
     @Inject
     PackListRepository packListRepository;
@@ -31,7 +31,6 @@ public class PackListController {
     */
 
     @GET
-    @SuppressWarnings("unchecked")
     public List<Packlist> getALL() {
         return packListRepository.findAll(Packlist.class);
     }

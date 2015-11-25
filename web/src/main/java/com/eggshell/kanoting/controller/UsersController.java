@@ -1,6 +1,7 @@
 package com.eggshell.kanoting.controller;
 
 import com.eggshell.kanoting.controller.subresources.UserPacklistController;
+import com.eggshell.kanoting.controller.subresources.UserWishlistController;
 import com.eggshell.kanoting.model.User;
 import com.eggshell.kanoting.repository.UserRepository;
 
@@ -81,5 +82,10 @@ public class UsersController {
     @Path("{userId}/packlists")
     public UserPacklistController locateUserPacklists() {
         return rc.getResource(UserPacklistController.class);
+    }
+
+    @Path("{userId}/wishlists")
+    public UserWishlistController locateUserWishlists() {
+        return rc.getResource(UserWishlistController.class);
     }
 }

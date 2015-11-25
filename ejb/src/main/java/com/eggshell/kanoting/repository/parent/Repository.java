@@ -47,9 +47,8 @@ public abstract class Repository {
      * @param entity Entity of given type passed
      * @return Entity objects retrieved from the database
      */
-    @SuppressWarnings("unchecked")
-    public List findAll(Class<?> entity) {
-        return getEm().createQuery("SELECT e FROM " + entity.getName() + " e").getResultList();
+    public <T> List<T> findAll(Class<T> entity) {
+        return getEm().createQuery("SELECT e FROM " + entity.getName() + " e", entity).getResultList();
     }
 
     // fixme: auth turned off

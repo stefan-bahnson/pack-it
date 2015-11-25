@@ -5,6 +5,8 @@ import com.eggshell.kanoting.repository.WishListRepository;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.container.ResourceContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -12,10 +14,14 @@ import java.util.List;
 @Path("/wishlists")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class WishListController {
+public class WishlistController {
 
     @Inject
     WishListRepository wishListRepository;
+
+    @Context
+    ResourceContext rc;
+
 
     /*
         create
@@ -31,7 +37,6 @@ public class WishListController {
     }
 
     @GET
-    @SuppressWarnings("unchecked")
     public Response getAll() {
         List<WishList> wishlists = wishListRepository.findAll(WishList.class);
 
@@ -39,23 +44,9 @@ public class WishListController {
     }
 
     @GET
-    @Path("/{wishListId}")
-    public WishList getWishList(@PathParam("wishListId") long id) {
+    @Path("/{wishlistId}")
+    public WishList getWishList(@PathParam("wishlistId") long id) {
         return wishListRepository.find(id, WishList.class);
     }
 
-    /*
-        todo: in this case we are updating a specifik entity on collection level. see PackListController for alternative.
-    */
-    @PUT
-    @Path("{wishlistId}")
-    public void updateWishList(@PathParam("wishlistId") long wishlistId, WishList wishList) {
-        wishListRepository.update(wishList);
-    }
-
-    @DELETE
-    @Path("{wishlistId}")
-    public void deleteWishList(@PathParam("wishlistId") long wishlistId) {
-        wishListRepository.delete(wishlistId, WishList.class);
-    }
 }
