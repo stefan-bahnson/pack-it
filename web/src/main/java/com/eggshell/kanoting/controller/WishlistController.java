@@ -24,17 +24,11 @@ public class WishlistController {
 
 
     /*
-        create
         get all
         get one by id
-        update
-        delete
+        todo: update
+        todo: delete
     */
-
-    @POST
-    public void create(WishList wishList) {
-        wishListRepository.add(wishList);
-    }
 
     @GET
     public Response getAll() {

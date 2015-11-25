@@ -48,9 +48,9 @@ public class UsersController {
     }
 
     @GET
-    @SuppressWarnings("unchecked")
     public Response getAll() {
         List<User> users = userRepository.findAll(User.class);
+
         return Response.ok(users).build();
     }
 
@@ -61,7 +61,6 @@ public class UsersController {
 
         return Response.ok(user).build();
     }
-
 
     @PUT
     @Path("{userId}")
