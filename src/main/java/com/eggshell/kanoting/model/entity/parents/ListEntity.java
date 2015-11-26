@@ -1,7 +1,7 @@
-package com.eggshell.kanoting.model.model.parents;
+package com.eggshell.kanoting.model.entity.parents;
 
-import com.eggshell.kanoting.model.model.Item;
-import com.eggshell.kanoting.model.model.User;
+import com.eggshell.kanoting.model.entity.Item;
+import com.eggshell.kanoting.model.entity.User;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

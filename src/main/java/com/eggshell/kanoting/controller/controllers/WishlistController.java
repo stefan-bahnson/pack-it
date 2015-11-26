@@ -1,7 +1,7 @@
-package com.eggshell.kanoting.controller.controller;
+package com.eggshell.kanoting.controller.controllers;
 
 
-import com.eggshell.kanoting.model.model.WishList;
+import com.eggshell.kanoting.model.entity.WishList;
 import com.eggshell.kanoting.model.repository.WishListRepository;
 
 import javax.inject.Inject;

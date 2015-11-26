@@ -1,8 +1,8 @@
-package com.eggshell.kanoting.controller.controller;
+package com.eggshell.kanoting.controller.controllers;
 
-import com.eggshell.kanoting.controller.controller.subresources.PacklistUsersController;
-import com.eggshell.kanoting.model.model.Item;
-import com.eggshell.kanoting.model.model.Packlist;
+import com.eggshell.kanoting.controller.controllers.sub.PacklistUsersController;
+import com.eggshell.kanoting.model.entity.Item;
+import com.eggshell.kanoting.model.entity.Packlist;
 import com.eggshell.kanoting.model.repository.PackListRepository;
 
 import javax.inject.Inject;

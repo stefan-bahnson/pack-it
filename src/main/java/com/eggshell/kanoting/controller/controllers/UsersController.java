@@ -1,8 +1,8 @@
-package com.eggshell.kanoting.controller.controller;
+package com.eggshell.kanoting.controller.controllers;
 
-import com.eggshell.kanoting.controller.controller.subresources.UserPacklistController;
-import com.eggshell.kanoting.controller.controller.subresources.UserWishlistController;
-import com.eggshell.kanoting.model.model.User;
+import com.eggshell.kanoting.controller.controllers.sub.UserPacklistController;
+import com.eggshell.kanoting.controller.controllers.sub.UserWishlistController;
+import com.eggshell.kanoting.model.entity.User;
 import com.eggshell.kanoting.model.repository.UserRepository;
 
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ import java.util.List;
 @Path("/users")
 public class UsersController {
 
-    private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/users");
+    private final URI resourceUri = URI.create("http://localhost:8080/nemo/controllers/users");
 
     @Context
     ResourceContext rc;

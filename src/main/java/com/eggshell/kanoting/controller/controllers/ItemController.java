@@ -1,6 +1,6 @@
-package com.eggshell.kanoting.controller.controller;
+package com.eggshell.kanoting.controller.controllers;
 
-import com.eggshell.kanoting.model.model.Item;
+import com.eggshell.kanoting.model.entity.Item;
 import com.eggshell.kanoting.model.repository.ItemRepository;
 
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class ItemController {
 
-    private final URI resourceUri = URI.create("http://localhost:8080/nemo/resources/items");
+    private final URI resourceUri = URI.create("http://localhost:8080/kanoting-web/resources/items");
 
     @Inject
     ItemRepository itemRepository;

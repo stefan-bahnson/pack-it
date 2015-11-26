@@ -1,6 +1,6 @@
-package com.eggshell.kanoting.model.model;
+package com.eggshell.kanoting.model.entity;
 
-import com.eggshell.kanoting.model.model.parents.BaseEntity;
+import com.eggshell.kanoting.model.entity.parents.BaseEntity;
 
 
 import javax.persistence.*;

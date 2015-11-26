@@ -1,4 +1,4 @@
-package com.eggshell.kanoting.model.model.enums;
+package com.eggshell.kanoting.model.enums;
 
 public enum ItemCategory {
 

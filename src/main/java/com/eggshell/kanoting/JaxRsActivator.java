@@ -1,11 +1,11 @@
-package com.eggshell.kanoting.controller.activator;
+package com.eggshell.kanoting;
 
-import com.eggshell.kanoting.controller.controller.ItemController;
-import com.eggshell.kanoting.controller.controller.PacklistController;
-import com.eggshell.kanoting.controller.controller.UsersController;
-import com.eggshell.kanoting.controller.controller.WishlistController;
+import com.eggshell.kanoting.controller.controllers.ItemController;
+import com.eggshell.kanoting.controller.controllers.PacklistController;
+import com.eggshell.kanoting.controller.controllers.UsersController;
+import com.eggshell.kanoting.controller.controllers.WishlistController;
 import com.eggshell.kanoting.controller.mappers.EJBExceptionMapper;
-import com.eggshell.kanoting.controller.mappers.WebApplicationExceptionMapper;
+import com.eggshell.kanoting.model.exceptions.mappers.WebApplicationExceptionMapper;
 import com.eggshell.kanoting.model.repository.parent.Repository;
 
 import javax.ws.rs.ApplicationPath;
@@ -27,8 +27,8 @@ public class JaxRsActivator extends Application {
         resources.add(WishlistController.class);
 
         // For activation of javax.security.annotations
-//        resources.save(RolesAllowedDynamicFeature.class);
-//        resources.save(Authenticate.class);
+//        controllers.save(RolesAllowedDynamicFeature.class);
+//        controllers.save(Authenticate.class);
         resources.add(EJBExceptionMapper.class);
         resources.add(WebApplicationExceptionMapper.class);
 

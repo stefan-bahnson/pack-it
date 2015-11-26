@@ -1,7 +1,7 @@
-package com.eggshell.kanoting.controller.controller.subresources;
+package com.eggshell.kanoting.controller.controllers.sub;
 
 
-import com.eggshell.kanoting.model.model.User;
+import com.eggshell.kanoting.model.entity.User;
 import com.eggshell.kanoting.model.repository.PackListRepository;
 
 import javax.inject.Inject;

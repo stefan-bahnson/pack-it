@@ -1,8 +1,8 @@
 package com.eggshell.kanoting.model.repository;
 
-import com.eggshell.kanoting.model.model.Item;
-import com.eggshell.kanoting.model.model.Packlist;
-import com.eggshell.kanoting.model.model.User;
+import com.eggshell.kanoting.model.entity.Item;
+import com.eggshell.kanoting.model.entity.Packlist;
+import com.eggshell.kanoting.model.entity.User;
 import com.eggshell.kanoting.model.repository.parent.Repository;
 
 import javax.ejb.Stateless;
