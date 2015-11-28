@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn clean install ; find ~/.m2 -iname '*kanoting*.war' | xargs -I{} cp {} /opt/wildfly/standalone/deployments/kanoting-web.war
